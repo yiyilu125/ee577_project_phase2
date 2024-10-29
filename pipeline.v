@@ -37,7 +37,7 @@ module pipeline #(
     wire [31:0] dmem_ctrl;
 
     //Decode module & DHU module & Register File module
-    Decoder decode(
+    decoder decode(
         .instruction(s1_reg_instruction),
         .read_en(wire_read_en),
         .read_address1(read_address1),
@@ -53,7 +53,7 @@ module pipeline #(
 
     //Harzard_detection_unit HDU() TODO
 
-    Register_File reg_file( //a register module with async read and sync write
+    register_file reg_file( //a register module with async read and sync write
         .clk(clk),
         .reset(reset),
         .read_en(wire_read_en),
