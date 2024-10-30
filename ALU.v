@@ -27,11 +27,7 @@
 	parameter VSQEU  = 6'b010000; // Square 
 	parameter VSQOU  = 6'b010001; // Square
 	parameter VSQRT  = 6'b010010; // Square Root
-	parameter VLD    = 6'b010011; // Load
-	parameter VSD    = 6'b010100; // Store
-	parameter VBEZ   = 6'b010101; // Branch if Equal to Zero
-	parameter VBNEZ  = 6'b010110; // Branch if Not Equal to Zero
-	parameter VNOP   = 6'b010111; // No Operation
+	
 	
 //----------------------------------------------------------------------------------- Division Define
 	 // Intermediate signals for each segment
