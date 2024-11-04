@@ -1,6 +1,10 @@
 module pipeline #(
     parameter INSTRUCTION_WIDTH = 32;
     parameter DATA_WIDTH = 64;
+    parameter REG_ADDRESS_LENGTH = 5;
+    parameter REG_ADDRESS_LENGTH = 5;
+    parameter OPCODE_LENGTH = 5;
+    parameter IMMEDIATE_ADDRESS_LENGTH = 16;
 )(
     input clk, rst,
     input [INSTRUCTION_WIDTH-1:0] imem_instruction,
@@ -8,8 +12,10 @@ module pipeline #(
     output [INSTRUCTION_WIDTH-1:0] imem_address,
     output [INSTRUCTION_WIDTH-1:0] dmem_address,
     output reg [DATA_WIDTH-1:0] dmem_dataIn,
+    output store_enable;
+    output mem_enable;
 );
-    /***************stage 1: Instruction Fetch***************/
+    /******************************stage 1: Instruction Fetch******************************/
     //stage register
     reg [INSTRUCTION_WIDTH-1:0] s1_reg_instruction;
 
@@ -17,112 +23,81 @@ module pipeline #(
     program_counter pc(
         .clk(clk),
         .reset(reset),
-        .branch_en(),
-        .branch_target(),
+        .branch_en(taken_sig),
+        .branch_target(target_address),
         .ins_address(imem_address)
     );
 
     //IF/ID register
     always@(posedge clk)begin
-       s1_reg_instruction <= imem_instruction; 
+        if (flush_sig==1) begin
+            s1_reg_instruction <= 0;
+        end
+        s1_reg_instruction <= imem_instruction; 
     end
 
-    /***************stage 2: Instruction Decode and Register Fetch***************/
-    //stage register
+    /******************************stage 2: Instruction Decode and Register Fetch******************************/
+    /*stage register*/
     reg s2_reg_writen_en;
     reg [REG_ADDRESS_LENGTH-1:0] s2_reg_rd_address;
     reg [DATA_WIDTH-1:0] s2_reg_data1, s2_reg_data2;
-    reg [4:0] s2_opcode; //TODO  // fix 31->4
-	
-	
-	
-	//--------------------------------------fix 
+    reg [OPCODE_LENGTH-1:0] s2_opcode; 
 	reg [4:0] s2_ww;	// width of arithmatic operation at S2
-	reg [4:0] ww; //width of arithmatic operation at S2
-	//\\------------------------------------------------------fix 
-	
-    //wire 
+    reg s2_reg_dmem_load_signal;
+
+
+    /*wire*/
+	wire [4:0] ww; //width of arithmatic operation at S2
     wire wire_writen_en;
     wire [REG_ADDRESS_LENGTH-1:0] wire_rd_address;
+    wire [REG_ADDRESS_LENGTH-1:0] read_address1, read_address2; // change 31bit to 5bit
 	
-	
-	
-	//--------------------------------------------------------------fix 
-    wire [4:0] read_address1, read_address2; // change 31bit to 5bit
-	//\\-------------------------------------------------------------fix  
-	
-	
-	
-	
-	//------------------------------------------------------------ fix 	
-	 wire [4:0] read_address1_HDU, read_address2_HDU; // rg addrss use 
-	 wire [1:0] BR // branch kinds identifier
-	 wire [4:0] Branch_RD;  // Branch target rg that to compare with ZERO
-	 wire [15:0] Branch_immediate; // immediate adder of BR Instruction
-	//\\---------------------------------------------------------- fix 
-	
-	
-	
+    wire [REG_ADDRESS_LENGTH-1:0] read_address1_HDU, read_address2_HDU; // rg addrss use 
+    wire [1:0] BR; // branch kinds identifier
+    wire [IMMEDIATE_ADDRESS_LENGTH-1:0] Branch_immediate; // immediate adder of BR Instruction
 	
     wire [DATA_WIDTH-1:0] reg_data1, reg_data2;
     wire [DATA_WIDTH-1:0] mux_rA_data, mux_rB_data;
     wire [4:0] opcode;  // fix 31->4
-    wire [31:0] dmem_ctrl;
+    wire [31:0] dmem_address;
     wire mux_ctrl_rA;
     wire mux_ctrl_rB;
+    wire store_en, load_en;
+    wire dmem_load_signal;
 
-    //Decode module & DHU module & Register File module
-    /*decoder decode(
-        .instruction(s1_reg_instruction),
-        .read_address1(read_address1),
-        .read_address2(read_address2),
-        .write_en(wire_writen_en),
-        .rd_address(wire_rd_address),
-        .opcode(opcode)
-        .dmem_ctrl(dmem_ctrl)
-    );*/
-//------------------------------------------------------------ fix 
+    //target wire
+    wire [INSTRUCTION_WIDTH-1:0] target_address;
+    wire taken_sig;
+    wire flush_sig;
 
+    /*Decode module & DHU module & Register File module*/
+    instruction_decoder uut(
+        //input
+        .instruction(s1_reg_instruction), 
 
-
-	instruction_decoder uut (
-        .instruction(instruction), 
-        .RegisterA((read_address1), // output：   for RA
+        //output
+        .RegisterA(read_address1), // output：   for RA
         .RegisterB(read_address2), // output : for RB
         .HDU_A(read_address1_HDU),  // output :RA used to send to HDU
         .HDU_B(read_address2_HDU),    // output: RB used to send to HDU   
 		.arithmatic_RD(wire_rd_address), // ouptut: destination address for arithmatic operation
 		
-		
+        //branch
 		.BR(BR), // ouput : to send to branch to indicate Branch kinds
-        .Branch_RD(Branch_RD),  // output : branch target address
         .Branch_immediate(Branch_immediate), //output : branch immediate address
 
-
-		
-        .MEM_addr(),// need to work ?
-		.writen_en()
-		.dmem_ctrl()
-		
+        .MEM_addr(dmem_address),// need to work ?
+		.writen_en(wire_writen_en),
 		
         .WW(ww),  // output: port for width of arithmatic operation
-        .operation(opcode) // output: port for operation kinds
-		
-		
-		
+        .operation(opcode), // output: port for operation kinds
+
+        .store_Enable(store_enable),
+        .mem_enable(mem_enable),
+        .load_signal(dmem_load_signal)
     );
 	
 	
-	
-//\\---------------------------------------------------------- fix	
-	
-	
-	
-	
-	
-	
-	
-
     //Harzard_detection_unit
     hdu hdu_uut(
         .current_RA(read_address1_HDU),
@@ -161,44 +136,33 @@ module pipeline #(
 
     //communication to the dmem
     assign dmem_dataIn = mux_rA_data;
-    assign dmem_address = dmem_ctrl;
+    assign dmem_address = dmem_address;
 
     //Branch module
     branch branch_uut(
         .clk(clk),
         .reset(reset),
 		
-		//---------------------------------- fix
         .branch(BR),   
         .branch_target(Branch_immediate),  
-        .data_branch(Branch_RD),    
-		//\\------------------------------- fix
+        .data_branch(reg_data1),    
 		
-        .target_address(),
-        .taken(),               
-        .flush() 
+        //output
+        .target_address(target_address),
+        .taken(taken_sig),               
+        .flush(flush_sig) 
     );
 
     //ID/EXE,MEM register
-	
     always@(posedge clk)begin
         s2_reg_rd_address <= wire_rd_address;
         s2_reg_writen <= wire_writen_en;
         s2_reg_data1 <= mux_rA_data;
-        s2_reg_data2 <= mux_ctrl_rB;
+        s2_reg_data2 <= mux_rB_data;
         s2_opcode <= opcode;
-		
-		//------------------------------------------------------fix 
 		s2_ww<=ww; //Width of operation	
-		//\\------------------------------------------------------fix 	
+        s2_reg_dmem_load_signal <= dmem_load_signal;
     end
-
-
-
-
-
-
-
 
     /***************stage 3: Execution or Memory Access***************/
     //stage register
@@ -219,9 +183,10 @@ module pipeline #(
     );
 
     mux_2 mux_module(
-        .data1(dmem_dataOut),
-        .data1(alu_result),
-        .result(mux_result)
+        .in0(alu_result),
+        .in1(dmem_dataOut),
+        .select(s2_reg_dmem_load_signal),
+        .out(mux_result)
     ); 
 
     //EXE,MEM/WB register
@@ -230,6 +195,4 @@ module pipeline #(
         s3_reg_rd_address <= s2_reg_rd_address
         s3_reg_result <= mux_result;
     end
-
-
 endmodule
