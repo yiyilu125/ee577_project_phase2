@@ -10,7 +10,7 @@ module pipeline #(
     input [DATA_WIDTH-1:0] dmem_dataOut,
     output [INSTRUCTION_WIDTH-1:0] imem_address,
     output [INSTRUCTION_WIDTH-1:0] dmem_address,
-    output reg [DATA_WIDTH-1:0] dmem_dataIn,
+    output [DATA_WIDTH-1:0] dmem_dataIn,
     output store_enable,
     output mem_enable
 );
