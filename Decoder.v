@@ -108,7 +108,7 @@ always @(*) begin
 			BR = 0; // No branch          
             Branch_immediate = 0 // No immediate value for branch
 			
-			MEM_addr = instruction[15:0];; // Not applicable for R-type
+			MEM_addr = instruction[15:0]; // Not applicable for R-type
 			writen_en=0;
 			
             WW =0; // Extract Write Width from bits 10-6
@@ -132,7 +132,7 @@ always @(*) begin
 			BR = 0; // No branch          
             Branch_immediate = 0 // No immediate value for branch
 			
-			MEM_addr = instruction[15:0];; // Not applicable for R-type
+			MEM_addr = instruction[15:0]; // Not applicable for R-type
 			writen_en=1;
 			
             WW =0; // Extract Write Width from bits 10-6
@@ -153,7 +153,7 @@ always @(*) begin
 			
 			
 			BR = 0; // No branch          
-            Branch_immediate = 0 // No immediate value for branch
+            Branch_immediate = 0; // No immediate value for branch
 			
 			MEM_addr = 0; // Not applicable for R-type
 			writen_en=0;
