@@ -15,8 +15,17 @@ module register_file (
 
     // Read logic (combinational)
     always @(*) begin
-        data_out1 = regfile[read_address1];
-        data_out2 = regfile[read_address2];
+        if (write_en && (write_address == read_address1)) begin
+            data_out1 = data_in;
+        end else begin
+            data_out1 = regfile[read_address1];
+        end
+
+        if (write_en && (write_address == read_address2)) begin
+            data_out2 = data_in;
+        end else begin 
+            data_out2 = regfile[read_address2];
+        end
     end
 
     // Write logic (sequential with sync reset)
