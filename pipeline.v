@@ -1,10 +1,9 @@
 module pipeline #(
-    parameter INSTRUCTION_WIDTH = 32;
-    parameter DATA_WIDTH = 64;
-    parameter REG_ADDRESS_LENGTH = 5;
-    parameter REG_ADDRESS_LENGTH = 5;
-    parameter OPCODE_LENGTH = 5;
-    parameter IMMEDIATE_ADDRESS_LENGTH = 16;
+    parameter INSTRUCTION_WIDTH = 32,
+    parameter DATA_WIDTH = 64,
+    parameter REG_ADDRESS_LENGTH = 5,
+    parameter OPCODE_LENGTH = 5,
+    parameter IMMEDIATE_ADDRESS_LENGTH = 16
 )(
     input clk, rst,
     input [INSTRUCTION_WIDTH-1:0] imem_instruction,
@@ -12,8 +11,8 @@ module pipeline #(
     output [INSTRUCTION_WIDTH-1:0] imem_address,
     output [INSTRUCTION_WIDTH-1:0] dmem_address,
     output reg [DATA_WIDTH-1:0] dmem_dataIn,
-    output store_enable;
-    output mem_enable;
+    output store_enable,
+    output mem_enable
 );
     /******************************stage 1: Instruction Fetch******************************/
     //stage register
@@ -22,7 +21,7 @@ module pipeline #(
     //PC module & IMEM module
     program_counter pc(
         .clk(clk),
-        .reset(reset),
+        .reset(rst),
         .branch_en(taken_sig),
         .branch_target(target_address),
         .ins_address(imem_address)
@@ -32,8 +31,9 @@ module pipeline #(
     always@(posedge clk)begin
         if (flush_sig==1) begin
             s1_reg_instruction <= 0;
+        end else begin
+            s1_reg_instruction <= imem_instruction; 
         end
-        s1_reg_instruction <= imem_instruction; 
     end
 
     /******************************stage 2: Instruction Decode and Register Fetch******************************/
@@ -59,7 +59,7 @@ module pipeline #(
     wire [DATA_WIDTH-1:0] reg_data1, reg_data2;
     wire [DATA_WIDTH-1:0] mux_rA_data, mux_rB_data;
     wire [4:0] opcode;  // fix 31->4
-    wire [31:0] dmem_address;
+    wire [INSTRUCTION_WIDTH-1:0] datamem_address;
     wire mux_ctrl_rA;
     wire mux_ctrl_rB;
     wire store_en, load_en;
@@ -86,7 +86,7 @@ module pipeline #(
 		.BR(BR), // ouput : to send to branch to indicate Branch kinds
         .Branch_immediate(Branch_immediate), //output : branch immediate address
 
-        .MEM_addr(dmem_address),// need to work ?
+        .MEM_addr(datamem_address),// need to work ?
 		.writen_en(wire_writen_en),
 		
         .WW(ww),  // output: port for width of arithmatic operation
@@ -110,10 +110,10 @@ module pipeline #(
     //register file
     register_file reg_file( //a register module with async read and sync write
         .clk(clk),
-        .reset(reset),
-        .writen_en(s3_reg_write_en) //signal come from the register in the 4th stage
-        .write_address(s3_reg_rd_address) //signal come from the register in the 4th stage
-        .data_in(s3_reg_result),   //signal come from the register in the 4th stage
+        .reset(rst),
+        .writen_en(s3_reg_write_en), //signal come from the register in the 4th stage
+        .write_address(s3_reg_rd_address), //signal come from the register in the 4th stage
+        .data_in(s3_reg_result),  //signal come from the register in the 4th stage
         .read_address1(read_address1),
         .read_address2(read_address2),
         .data_out1(reg_data1),
@@ -136,12 +136,12 @@ module pipeline #(
 
     //communication to the dmem
     assign dmem_dataIn = mux_rA_data;
-    assign dmem_address = dmem_address;
+    assign dmem_address = datamem_address;
 
     //Branch module
     branch branch_uut(
         .clk(clk),
-        .reset(reset),
+        .reset(rst),
 		
         .branch(BR),   
         .branch_target(Branch_immediate),  
@@ -192,7 +192,7 @@ module pipeline #(
     //EXE,MEM/WB register
     always@(posedge clk)begin
         s3_reg_write_en <= s2_reg_writen_en;
-        s3_reg_rd_address <= s2_reg_rd_address
+        s3_reg_rd_address <= s2_reg_rd_address;
         s3_reg_result <= mux_result;
     end
 endmodule
