@@ -14,6 +14,23 @@ module pipeline #(
     output store_enable,
     output mem_enable
 );
+    /*stage 1: IF reg, wire*/
+    //stage register
+    reg [INSTRUCTION_WIDTH-1:0] s1_reg_instruction;
+    //wire
+    wire flush_sig;
+    wire [INSTRUCTION_WIDTH-1:0] target_address;
+    wire taken_sig;
+
+    /*stage 2: ID, wire*/
+    //stage register
+    reg s3_reg_write_en;
+    reg [REG_ADDRESS_LENGTH-1:0] s3_reg_rd_address;
+    reg [DATA_WIDTH-1:0] s3_reg_result;
+    //wire
+    wire [DATA_WIDTH-1:0] alu_result;
+    wire [DATA_WIDTH-1:0] mux_result;
+
     /*stage 3: EXE & MEM reg, wire*/
     //stage register
     reg s3_reg_write_en;
@@ -24,14 +41,6 @@ module pipeline #(
     wire [DATA_WIDTH-1:0] mux_result;
 
     /******************************stage 1: Instruction Fetch******************************/
-    //stage register
-    reg [INSTRUCTION_WIDTH-1:0] s1_reg_instruction;
-
-    //wire
-    wire flush_sig;
-    wire [INSTRUCTION_WIDTH-1:0] target_address;
-    wire taken_sig;
-
     //PC module & IMEM module
     program_counter pc(
         .clk(clk),
@@ -175,14 +184,6 @@ module pipeline #(
     end
 
     /***************stage 3: Execution or Memory Access***************/
-    //stage register
-    reg s3_reg_write_en;
-    reg [REG_ADDRESS_LENGTH-1:0] s3_reg_rd_address;
-    reg [DATA_WIDTH-1:0] s3_reg_result;
-    //wire
-    wire [DATA_WIDTH-1:0] alu_result;
-    wire [DATA_WIDTH-1:0] mux_result;
-
     //mux module & ALU module & SFU module
     alu alu_module( //this alu may contains SFU
         .opcode(s2_opcode),
