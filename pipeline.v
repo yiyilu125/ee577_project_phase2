@@ -23,13 +23,31 @@ module pipeline #(
     wire taken_sig;
 
     /*stage 2: ID, wire*/
-    //stage register
-    reg s3_reg_write_en;
-    reg [REG_ADDRESS_LENGTH-1:0] s3_reg_rd_address;
-    reg [DATA_WIDTH-1:0] s3_reg_result;
-    //wire
-    wire [DATA_WIDTH-1:0] alu_result;
-    wire [DATA_WIDTH-1:0] mux_result;
+    /*stage register*/
+    reg s2_reg_writen_en;
+    reg [REG_ADDRESS_LENGTH-1:0] s2_reg_rd_address;
+    reg [DATA_WIDTH-1:0] s2_reg_data1, s2_reg_data2;
+    reg [OPCODE_LENGTH-1:0] s2_opcode; 
+	reg [4:0] s2_ww;	// width of arithmatic operation at S2
+    reg s2_reg_dmem_load_signal;
+    /*wire*/
+	wire [4:0] ww; //width of arithmatic operation at S2
+    wire wire_writen_en;
+    wire [REG_ADDRESS_LENGTH-1:0] wire_rd_address;
+    wire [REG_ADDRESS_LENGTH-1:0] read_address1, read_address2; // change 31bit to 5bit
+	
+    wire [REG_ADDRESS_LENGTH-1:0] read_address1_HDU, read_address2_HDU; // rg addrss use 
+    wire [1:0] BR; // branch kinds identifier
+    wire [IMMEDIATE_ADDRESS_LENGTH-1:0] Branch_immediate; // immediate adder of BR Instruction
+	
+    wire [DATA_WIDTH-1:0] reg_data1, reg_data2;
+    wire [DATA_WIDTH-1:0] mux_rA_data, mux_rB_data;
+    wire [4:0] opcode;  // fix 31->4
+    wire [INSTRUCTION_WIDTH-1:0] datamem_address;
+    wire mux_ctrl_rA;
+    wire mux_ctrl_rB;
+    wire store_en, load_en;
+    wire dmem_load_signal;
 
     /*stage 3: EXE & MEM reg, wire*/
     //stage register
@@ -60,35 +78,6 @@ module pipeline #(
     end
 
     /******************************stage 2: Instruction Decode and Register Fetch******************************/
-    /*stage register*/
-    reg s2_reg_writen_en;
-    reg [REG_ADDRESS_LENGTH-1:0] s2_reg_rd_address;
-    reg [DATA_WIDTH-1:0] s2_reg_data1, s2_reg_data2;
-    reg [OPCODE_LENGTH-1:0] s2_opcode; 
-	reg [4:0] s2_ww;	// width of arithmatic operation at S2
-    reg s2_reg_dmem_load_signal;
-
-
-    /*wire*/
-	wire [4:0] ww; //width of arithmatic operation at S2
-    wire wire_writen_en;
-    wire [REG_ADDRESS_LENGTH-1:0] wire_rd_address;
-    wire [REG_ADDRESS_LENGTH-1:0] read_address1, read_address2; // change 31bit to 5bit
-	
-    wire [REG_ADDRESS_LENGTH-1:0] read_address1_HDU, read_address2_HDU; // rg addrss use 
-    wire [1:0] BR; // branch kinds identifier
-    wire [IMMEDIATE_ADDRESS_LENGTH-1:0] Branch_immediate; // immediate adder of BR Instruction
-	
-    wire [DATA_WIDTH-1:0] reg_data1, reg_data2;
-    wire [DATA_WIDTH-1:0] mux_rA_data, mux_rB_data;
-    wire [4:0] opcode;  // fix 31->4
-    wire [INSTRUCTION_WIDTH-1:0] datamem_address;
-    wire mux_ctrl_rA;
-    wire mux_ctrl_rB;
-    wire store_en, load_en;
-    wire dmem_load_signal;
-
-
     /*Decode module & DHU module & Register File module*/
     instruction_decoder uut(
         //input
