@@ -14,6 +14,15 @@ module pipeline #(
     output store_enable,
     output mem_enable
 );
+    /*stage 3: EXE & MEM reg, wire*/
+    //stage register
+    reg s3_reg_write_en;
+    reg [REG_ADDRESS_LENGTH-1:0] s3_reg_rd_address;
+    reg [DATA_WIDTH-1:0] s3_reg_result;
+    //wire
+    wire [DATA_WIDTH-1:0] alu_result;
+    wire [DATA_WIDTH-1:0] mux_result;
+
     /******************************stage 1: Instruction Fetch******************************/
     //stage register
     reg [INSTRUCTION_WIDTH-1:0] s1_reg_instruction;
@@ -108,7 +117,18 @@ module pipeline #(
         .mux_ctrl_rB(mux_ctrl_rB)
     );
 
-    
+    //register file
+    register_file reg_file( //a register module with async read and sync write
+        .clk(clk),
+        .reset(rst),
+        .writen_en(s3_reg_write_en), //signal come from the register in the 4th stage
+        .write_address(s3_reg_rd_address), //signal come from the register in the 4th stage
+        .data_in(s3_reg_result),  //signal come from the register in the 4th stage
+        .read_address1(read_address1),
+        .read_address2(read_address2),
+        .data_out1(reg_data1),
+        .data_out2(reg_data2)
+    );
 
     //forwarding unit mux
     mux_2 mux_ra (
@@ -187,16 +207,4 @@ module pipeline #(
     end
 
     /******************************stage 4: WB******************************/
-    //register file
-    register_file reg_file( //a register module with async read and sync write
-        .clk(clk),
-        .reset(rst),
-        .writen_en(s3_reg_write_en), //signal come from the register in the 4th stage
-        .write_address(s3_reg_rd_address), //signal come from the register in the 4th stage
-        .data_in(s3_reg_result),  //signal come from the register in the 4th stage
-        .read_address1(read_address1),
-        .read_address2(read_address2),
-        .data_out1(reg_data1),
-        .data_out2(reg_data2)
-    );
 endmodule
