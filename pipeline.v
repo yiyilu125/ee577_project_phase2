@@ -93,7 +93,7 @@ module pipeline #(
         .operation(opcode), // output: port for operation kinds
 
         .store_Enable(store_enable),
-        .mem_enable(mem_enable),
+        .mem_Enable(mem_enable),
         .load_signal(dmem_load_signal)
     );
 	
