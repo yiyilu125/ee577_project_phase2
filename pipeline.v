@@ -18,6 +18,9 @@ module pipeline #(
     //stage register
     reg [INSTRUCTION_WIDTH-1:0] s1_reg_instruction;
 
+    //wire
+    wire flush_sig;
+
     //PC module & IMEM module
     program_counter pc(
         .clk(clk),
@@ -68,7 +71,6 @@ module pipeline #(
     //target wire
     wire [INSTRUCTION_WIDTH-1:0] target_address;
     wire taken_sig;
-    wire flush_sig;
 
     /*Decode module & DHU module & Register File module*/
     instruction_decoder uut(
@@ -156,7 +158,7 @@ module pipeline #(
     //ID/EXE,MEM register
     always@(posedge clk)begin
         s2_reg_rd_address <= wire_rd_address;
-        s2_reg_writen <= wire_writen_en;
+        s2_reg_writen_en <= wire_writen_en;
         s2_reg_data1 <= mux_rA_data;
         s2_reg_data2 <= mux_rB_data;
         s2_opcode <= opcode;
