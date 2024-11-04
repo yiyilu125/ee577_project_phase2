@@ -106,7 +106,7 @@ always @(*) begin
 			
 			
 			BR = 0; // No branch          
-            Branch_immediate = 0 // No immediate value for branch
+            Branch_immediate = 0; // No immediate value for branch
 			
 			MEM_addr = instruction[15:0]; // Not applicable for R-type
 			writen_en=0;
@@ -130,7 +130,7 @@ always @(*) begin
 			
 			
 			BR = 0; // No branch          
-            Branch_immediate = 0 // No immediate value for branch
+            Branch_immediate = 0; // No immediate value for branch
 			
 			MEM_addr = instruction[15:0]; // Not applicable for R-type
 			writen_en=1;
