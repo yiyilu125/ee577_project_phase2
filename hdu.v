@@ -1,7 +1,7 @@
 
 module hdu # (
-    parameter REG_ADDRESS_LENGTH = 5;
-    parameter OPCODE_LENGTH = 5;
+    parameter REG_ADDRESS_LENGTH = 5,
+    parameter OPCODE_LENGTH = 5
 )(
     input [REG_ADDRESS_LENGTH-1:0] current_RA, current_RB, Lasttime_RD,
     // input [OPCODE_LENGTH-1:0] opcode,

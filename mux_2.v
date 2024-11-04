@@ -1,5 +1,5 @@
 module mux_2 #(
-    parameter LENGTH = 32;
+    parameter LENGTH = 32
 )(
     input [LENGTH-1:0] in0, in1,
     input select,
