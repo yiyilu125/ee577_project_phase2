@@ -17,7 +17,10 @@ module pipeline #(
     program_counter pc(
         .clk(clk),
         .reset(reset),
-        .ins_address(imem_address));
+        .branch(),
+        .branch_target(),
+        .ins_address(imem_address)
+    );
 
     always@(posedge clk)begin
        s1_reg_instruction <= imem_instruction; 
@@ -56,13 +59,13 @@ module pipeline #(
     register_file reg_file( //a register module with async read and sync write
         .clk(clk),
         .reset(reset),
-        .read_en(wire_read_en),
+        // .read_en(wire_read_en),
         .writen_en(s3_reg_write_en) //signal come from the register in the 4th stage
-        .dataIn(s3_reg_alu_result),   //signal come from the register in the 4th stage
-        .data_address1(read_address1),
-        .data_address2(read_address2),
-        .dataout1(reg_data1),
-        .dataout2(reg_data2)
+        .data_in(s3_reg_alu_result),   //signal come from the register in the 4th stage
+        .read_address1(read_address1),
+        .read_address2(read_address2),
+        .data_out1(reg_data1),
+        .data_out2(reg_data2)
     );
 
     always@(posedge clk)begin
