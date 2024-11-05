@@ -3,7 +3,7 @@ module register_file (
     input reset,
     input [4:0] read_address1,
     input [4:0] read_address2,    
-    input write_en,               // write back enable
+    input writen_en,               // write back enable
     input [4:0] write_address,     // 5-bit address for 32 registers
     input [63:0] data_in,
     output reg [63:0] data_out1,
@@ -15,13 +15,13 @@ module register_file (
 
     // Read logic (combinational)
     always @(*) begin
-        if (write_en && (write_address == read_address1)) begin
+        if (writen_en && (write_address == read_address1)) begin
             data_out1 = data_in;
         end else begin
             data_out1 = regfile[read_address1];
         end
 
-        if (write_en && (write_address == read_address2)) begin
+        if (writen_en && (write_address == read_address2)) begin
             data_out2 = data_in;
         end else begin 
             data_out2 = regfile[read_address2];
@@ -34,7 +34,7 @@ module register_file (
             for (i = 0; i < 32; i = i + 1) begin
                 regfile[i] <= 64'b0;
             end
-        end else if (write_en && write_address != 5'b00000) begin
+        end else if (writen_en && write_address != 5'b00000) begin
             regfile[write_address] <= data_in;
         end 
     end
