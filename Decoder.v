@@ -97,31 +97,7 @@ always @(*) begin
 			load_signal=0;
         end
         6'b100000: 
-        begin // SW (Store Word)
-            RegisterA = 0; // Extract Register A address from bits 25-21
-            RegisterB = 0; // Extract Register B 0
-            HDU_A = instruction[25:21]; // Set Hazard Detection Unit input A to Register A
-            HDU_B = 0; // Set Hazard Detection Unit input B to Register B
-			arithmatic_RD = 0; // Set destination register for arithmetic result
-			
-			
-			BR = 0; // No branch          
-            Branch_immediate = 0; // No immediate value for branch
-			
-			MEM_addr = instruction[15:0]; // Not applicable for R-type
-			writen_en=0;
-			
-            WW =0; // Extract Write Width from bits 10-6
-            operation = 0; // Extract operation code from bits 5-0
-                   
-        
-			store_Enable=1;
-			mem_Enable=1;
-			load_signal=0;
-			
-        end
-        6'b100001: 
-        begin // M-type instructions Load Word
+        begin // LD
             RegisterA = 0; // Extract Register A address from bits 25-21
             RegisterB = 0; // Extract Register B 0
             HDU_A = instruction[25:21]; // Set Hazard Detection Unit input A to Register A
@@ -142,6 +118,30 @@ always @(*) begin
 			store_Enable=0;
 			mem_Enable=1;
 			load_signal=1;
+			
+        end
+        6'b100001: 
+        begin // M-type instructions SW
+            RegisterA = 0; // Extract Register A address from bits 25-21
+            RegisterB = 0; // Extract Register B 0
+            HDU_A = instruction[25:21]; // Set Hazard Detection Unit input A to Register A
+            HDU_B = 0; // Set Hazard Detection Unit input B to Register B
+			arithmatic_RD = 0; // Set destination register for arithmetic result
+			
+			
+			BR = 0; // No branch          
+            Branch_immediate = 0; // No immediate value for branch
+			
+			MEM_addr = instruction[15:0]; // Not applicable for R-type
+			writen_en=0;
+			
+            WW =0; // Extract Write Width from bits 10-6
+            operation = 0; // Extract operation code from bits 5-0
+                   
+        
+			store_Enable=1;
+			mem_Enable=1;
+			load_signal=0;
         end
         6'b111100:
         begin // NOP instruction

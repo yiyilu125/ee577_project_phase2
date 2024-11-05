@@ -22,28 +22,49 @@ w1730774323
 FC:/ee577_project_phase2/ALU.v
 L0 2
 Z2 OL;L;10.6e;65
-Z3 !s108 1730785528.000000
+Z3 !s108 1730844092.000000
 !s107 C:/ee577_project_phase2/ALU.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/ee577_project_phase2/ALU.v|
 !i113 0
 Z4 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 Z5 tCvgOpt 0
-vAND2X1
-Z6 !s110 1730785529
+valu_tb
+Z6 !s110 1730844093
 !i10b 1
-!s100 jikDfLFad^UZXOEQR^00z2
-I^_fhRFV8<jh5?k6bKfFzA0
+!s100 =M0HI]A[IhzfRLK>PWG?Z0
+IBO>I1Vif_cgfaMRBG5=SW0
 R0
 R1
-Z7 w1730310172
-Z8 8./include/gscl45nm.v
-Z9 F./include/gscl45nm.v
+w1730837371
+8C:\ee577_project_phase2\ALU_tb.v
+FC:\ee577_project_phase2\ALU_tb.v
 L0 3
 R2
 r1
 !s85 0
 31
-Z10 !s108 1730785529.000000
+Z7 !s108 1730844093.000000
+!s107 C:\ee577_project_phase2\ALU_tb.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:\ee577_project_phase2\ALU_tb.v|
+!i113 0
+R4
+R5
+vAND2X1
+R6
+!i10b 1
+!s100 jikDfLFad^UZXOEQR^00z2
+I^_fhRFV8<jh5?k6bKfFzA0
+R0
+R1
+Z8 w1730310172
+Z9 8./include/gscl45nm.v
+Z10 F./include/gscl45nm.v
+L0 3
+R2
+r1
+!s85 0
+31
+R7
 Z11 !s107 ./include/gscl45nm.v|./include/imem.v|./include/dmem.v|C:\ee577_project_phase2\tb_cmp.v|
 Z12 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:\ee577_project_phase2\tb_cmp.v|
 !i113 0
@@ -57,15 +78,15 @@ R6
 I98;8:N;nhZcNhd6?RdQWm3
 R0
 R1
-R7
 R8
 R9
+R10
 Z13 L0 29
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -79,15 +100,15 @@ R6
 IT0PBoYkT2_T2eFT4JVGh63
 R0
 R1
-R7
 R8
 R9
+R10
 L0 55
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -101,15 +122,15 @@ R6
 Id@FILaH312IAT21Gc?lL62
 R0
 R1
-R7
 R8
 R9
+R10
 L0 87
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -143,15 +164,15 @@ R6
 IXe8:36og=AB2kooDe6a;Z0
 R0
 R1
-R7
 R8
 R9
+R10
 L0 124
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -165,15 +186,15 @@ R6
 IPfcAX2?o[>BI@ohE2N=mC2
 R0
 R1
-R7
 R8
 R9
+R10
 L0 146
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -186,10 +207,10 @@ r1
 !s85 0
 31
 !i10b 1
-!s100 mVhdOK^2Q:ZeTRHZ89;ZW0
-I1>cGR985aU6YC?h8MfJYM2
+!s100 N?[YN5_IAKZ_66RHD4O@?1
+IZ;i8f`b=]emhR9I67c>LB2
 R1
-R14
+w1730843925
 8C:\ee577_project_phase2\cmp.v
 FC:\ee577_project_phase2\cmp.v
 L0 1
@@ -207,15 +228,15 @@ R6
 IUmfU^?3KHlP94_=H?bQR30
 R0
 R1
-R7
 R8
 R9
+R10
 L0 168
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -229,15 +250,15 @@ R6
 I@nJDJbo1AAJj3bSj?^gAh0
 R0
 R1
-R7
 R8
 R9
+R10
 L0 190
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -251,15 +272,15 @@ R6
 I6@OFS=a_Uhm=_RaZSh[mm3
 R0
 R1
-R7
 R8
 R9
+R10
 L0 212
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -273,15 +294,15 @@ R6
 I4z2`KP]fho9JZ@WhE9Yc=1
 R0
 R1
-R7
 R8
 R9
+R10
 L0 234
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -295,15 +316,15 @@ R6
 IjAQjC6]cmliZLm[aoWX8V3
 R0
 R1
-R7
 R8
 R9
+R10
 L0 274
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -317,15 +338,15 @@ R6
 IQ_A@9R:>8hnfWN45@nNbL3
 R0
 R1
-R7
 R8
 R9
+R10
 L0 313
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -341,12 +362,12 @@ r1
 !s100 KW5UXnG]>CLib57>H=C573
 IM2fWiH0lZd4hR?]3GRV^D0
 R1
-R7
+R8
 8./include/dmem.v
 F./include/dmem.v
 Z15 L0 15
 R2
-R10
+R7
 R11
 R12
 !i113 0
@@ -424,15 +445,15 @@ R6
 IYEzX96WF?7anSBCA4YgIz3
 R0
 R1
-R7
 R8
 R9
+R10
 L0 382
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -440,23 +461,23 @@ R4
 R5
 n@f@a@x1
 vforward_unit
-R6
+!s110 1730844092
 !i10b 1
 !s100 O<DISXfiRaceQ^WXgCP8X1
-IBn?Qji8QQE8PY7o:B13>h1
+IET8SCSQQ?l8T2]:7IUhm11
 R0
 R1
 R14
-8C:\ee577_project_phase2\forward_unit.v
-FC:\ee577_project_phase2\forward_unit.v
+8C:/ee577_project_phase2/forward_unit.v
+FC:/ee577_project_phase2/forward_unit.v
 L0 1
 R2
 r1
 !s85 0
 31
 R3
-!s107 C:\ee577_project_phase2\forward_unit.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:\ee577_project_phase2\forward_unit.v|
+!s107 C:/ee577_project_phase2/forward_unit.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/ee577_project_phase2/forward_unit.v|
 !i113 0
 R4
 R5
@@ -467,15 +488,15 @@ R6
 IV:C;?2ZCIedVzN;_5VRRh3
 R0
 R1
-R7
 R8
 R9
+R10
 L0 427
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -496,7 +517,7 @@ R14
 FC:/ee577_project_phase2/hdu.v
 L0 2
 R2
-R10
+R3
 !s107 C:/ee577_project_phase2/hdu.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/ee577_project_phase2/hdu.v|
 !i113 0
@@ -516,7 +537,7 @@ w1730310173
 F./include/imem.v
 R15
 R2
-R10
+R7
 R11
 R12
 !i113 0
@@ -528,10 +549,10 @@ r1
 !s85 0
 31
 !i10b 1
-!s100 Q=@gBBEQLl7o4;U49M1`R3
-Iz_Hm9@G^QzdhBj_;_:AZ:0
+!s100 P<WDEJ8S0;_EH>Ki6JMG82
+I8l:i:V[1E6^bMf_1a^;bN1
 R1
-R14
+w1730840366
 8C:\ee577_project_phase2\Decoder.v
 FC:\ee577_project_phase2\Decoder.v
 L0 1
@@ -542,6 +563,27 @@ R3
 !i113 0
 R4
 R5
+vinstruction_decoder_tb
+R6
+!i10b 1
+!s100 =?A312X7_Ah^J[iMiTEo;1
+IA`0F5UL66UAHVVADTFhdF0
+R0
+R1
+w1730839642
+8C:\ee577_project_phase2\decoder_tb.v
+FC:\ee577_project_phase2\decoder_tb.v
+L0 1
+R2
+r1
+!s85 0
+31
+R7
+!s107 C:\ee577_project_phase2\decoder_tb.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:\ee577_project_phase2\decoder_tb.v|
+!i113 0
+R4
+R5
 vINVX1
 R6
 !i10b 1
@@ -549,15 +591,15 @@ R6
 I8UN=TihS[4gMa9FNmI5UQ1
 R0
 R1
-R7
 R8
 R9
+R10
 L0 461
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -571,15 +613,15 @@ R6
 ICk_`ZPF@9G8j5PRLn;N5]3
 R0
 R1
-R7
 R8
 R9
+R10
 L0 483
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -593,15 +635,15 @@ R6
 IGECT[X^c1gN[Q>_dco;bS3
 R0
 R1
-R7
 R8
 R9
+R10
 L0 505
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -615,15 +657,15 @@ R6
 IGSWjCWYRl9d81b]im[U9d0
 R0
 R1
-R7
 R8
 R9
+R10
 L0 527
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -637,15 +679,15 @@ R6
 INI;@V]IIjW^0LF:IjZ5CB2
 R0
 R1
-R7
 R8
 R9
+R10
 L0 549
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -659,15 +701,15 @@ R6
 Idm@0bDJ:Dm<872kYVB0==0
 R0
 R1
-R7
 R8
 R9
+R10
 L0 589
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -688,7 +730,7 @@ R14
 FC:/ee577_project_phase2/mux_2.v
 L0 1
 R2
-R10
+R3
 !s107 C:/ee577_project_phase2/mux_2.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/ee577_project_phase2/mux_2.v|
 !i113 0
@@ -701,15 +743,15 @@ R6
 ICg@:U=a_n=]Nj`W3bk>PF2
 R0
 R1
-R7
 R8
 R9
+R10
 L0 620
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -723,15 +765,15 @@ R6
 IDjGHzjGa5BJfnbAXdE>EX0
 R0
 R1
-R7
 R8
 R9
+R10
 L0 647
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -745,15 +787,15 @@ R6
 IEGlB?glWEM[?88MAGfHmI3
 R0
 R1
-R7
 R8
 R9
+R10
 L0 678
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -767,15 +809,15 @@ R6
 IXSiWC6mJE6lY=4;W3a_lN1
 R0
 R1
-R7
 R8
 R9
+R10
 L0 705
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -789,15 +831,15 @@ R6
 IaLmHH_o>SBbTGg<P3Mni90
 R0
 R1
-R7
 R8
 R9
+R10
 L0 736
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -811,15 +853,15 @@ R6
 ImW_NH8AmO_<df;AKh@IC[2
 R0
 R1
-R7
 R8
 R9
+R10
 L0 768
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -833,15 +875,15 @@ R6
 IK=lQ8k]99Wf2zlKEoI@Xz3
 R0
 R1
-R7
 R8
 R9
+R10
 L0 805
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -855,15 +897,15 @@ R6
 I2R??KQ_oWGJ:X4EBC<YR:2
 R0
 R1
-R7
 R8
 R9
+R10
 L0 831
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -877,16 +919,16 @@ r1
 31
 !i10b 1
 !s100 h@A9b5@^UXRFDmOma_aUS1
-IB2d=[J3c7=;8Ujm9UdG5f3
+I91R<;JCeCl7ZEGUOhk44Y0
 R1
 w1730774368
-8C:/ee577_project_phase2/pipeline.v
-FC:/ee577_project_phase2/pipeline.v
+8C:\ee577_project_phase2\pipeline.v
+FC:\ee577_project_phase2\pipeline.v
 L0 1
 R2
-R10
-!s107 C:/ee577_project_phase2/pipeline.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/ee577_project_phase2/pipeline.v|
+R7
+!s107 C:\ee577_project_phase2\pipeline.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:\ee577_project_phase2\pipeline.v|
 !i113 0
 R4
 R5
@@ -904,7 +946,7 @@ R14
 FC:/ee577_project_phase2/pc.v
 L0 1
 R2
-R10
+R7
 !s107 C:/ee577_project_phase2/pc.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/ee577_project_phase2/pc.v|
 !i113 0
@@ -917,16 +959,16 @@ r1
 31
 !i10b 1
 !s100 ]jW^QniUkcJ?FZnb?@X7X3
-I82I62?1_0mZV849mnZ>Af2
+I<oak;47MQAIa20YMN=BhB2
 R1
 w1730767727
-8C:/ee577_project_phase2/regfile.v
-FC:/ee577_project_phase2/regfile.v
+8C:\ee577_project_phase2\regfile.v
+FC:\ee577_project_phase2\regfile.v
 L0 1
 R2
-R10
-!s107 C:/ee577_project_phase2/regfile.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/ee577_project_phase2/regfile.v|
+R7
+!s107 C:\ee577_project_phase2\regfile.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:\ee577_project_phase2\regfile.v|
 !i113 0
 R4
 R5
@@ -936,15 +978,15 @@ r1
 !s85 0
 31
 !i10b 1
-!s100 o9jOjeU1KdJRJg8RP`lGd1
-I3zP?ed<?i^gGLNUjT0W>83
+!s100 Gfem][LmdDh=V01o=N9L40
+I8FBD@95NaDXe0^A^Ki4BZ3
 R1
-w1730785505
+w1730836760
 8C:\ee577_project_phase2\tb_cmp.v
 FC:\ee577_project_phase2\tb_cmp.v
 L0 36
 R2
-R10
+R7
 R11
 R12
 !i113 0
@@ -957,15 +999,15 @@ R6
 I[zFji:i7MGWk]3e^k7<9Y2
 R0
 R1
-R7
 R8
 R9
+R10
 L0 857
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -979,15 +1021,15 @@ R6
 IP8Rc=Plna>JInO:dQj@=L3
 R0
 R1
-R7
 R8
 R9
+R10
 L0 886
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -1001,15 +1043,15 @@ R6
 I38;l0QgzE5DgO>U_9GA4;2
 R0
 R1
-R7
 R8
 R9
+R10
 L0 966
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -1022,15 +1064,15 @@ R6
 I]YYiYnZKZDHc<3VQ:VToZ3
 R0
 R1
-R7
 R8
 R9
+R10
 L0 1037
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -1043,15 +1085,15 @@ R6
 I?<bH3M_]<a7Ilb;:0]X;81
 R0
 R1
-R7
 R8
 R9
+R10
 L0 1018
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -1064,15 +1106,15 @@ R6
 IkR@l:E=5dW5ngj_@^QS7P3
 R0
 R1
-R7
 R8
 R9
+R10
 L0 992
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -1085,15 +1127,15 @@ R6
 I5Ol^T5YBmXYOPVT;kV5h^1
 R0
 R1
-R7
 R8
 R9
+R10
 L0 915
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0
@@ -1107,15 +1149,15 @@ R6
 I4_9;M0ODiKfk3Fb>`CiL82
 R0
 R1
-R7
 R8
 R9
+R10
 L0 942
 R2
 r1
 !s85 0
 31
-R10
+R7
 R11
 R12
 !i113 0

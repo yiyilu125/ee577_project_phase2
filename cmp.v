@@ -52,10 +52,10 @@ pipeline #(
     .clk(clk),
     .rst(reset),
     .imem_instruction(node0_inst_in),
-    .dmem_dataOut(node0_d_out),
+    .dmem_dataOut(node0_d_in),
     .imem_address(node0_pc_out),
     .dmem_address(node0_addr_out),
-    .dmem_dataIn(node0_d_in),
+    .dmem_dataIn(node0_d_out),
     .store_enable(node0_memWrEn),
     .mem_enable(node0_memEn)
 );
@@ -71,10 +71,10 @@ pipeline #(
     .clk(clk),
     .rst(reset),
     .imem_instruction(node1_inst_in),
-    .dmem_dataOut(node1_d_out),
+    .dmem_dataOut(node1_d_in),
     .imem_address(node1_pc_out),
     .dmem_address(node1_addr_out),
-    .dmem_dataIn(node1_d_in),
+    .dmem_dataIn(node1_d_out),
     .store_enable(node1_memWrEn),
     .mem_enable(node1_memEn)
 );
@@ -90,10 +90,10 @@ pipeline #(
     .clk(clk),
     .rst(reset),
     .imem_instruction(node2_inst_in),
-    .dmem_dataOut(node2_d_out),
+    .dmem_dataOut(node2_d_in),
     .imem_address(node2_pc_out),
     .dmem_address(node2_addr_out),
-    .dmem_dataIn(node2_d_in),
+    .dmem_dataIn(node2_d_out),
     .store_enable(node2_memWrEn),
     .mem_enable(node2_memEn)
 );
@@ -109,10 +109,10 @@ pipeline #(
     .clk(clk),
     .rst(reset),
     .imem_instruction(node3_inst_in),
-    .dmem_dataOut(node3_d_out),
+    .dmem_dataOut(node3_d_in),
     .imem_address(node3_pc_out),
     .dmem_address(node3_addr_out),
-    .dmem_dataIn(node3_d_in),
+    .dmem_dataIn(node3_d_out),
     .store_enable(node3_memWrEn),
     .mem_enable(node3_memEn)
 );
