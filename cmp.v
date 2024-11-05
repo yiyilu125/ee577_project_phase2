@@ -13,27 +13,27 @@ module cardinal_cmp (
 
     // Core 1
     input wire [31:0] node1_inst_in,
-    input wire [31:0] node1_d_in,
+    input wire [63:0] node1_d_in,
     output wire [31:0] node1_pc_out,
-    output wire [31:0] node1_d_out,
+    output wire [63:0] node1_d_out,
     output wire [31:0] node1_addr_out,
     output wire node1_memWrEn,
     output wire node1_memEn,
 
     // Core 2
     input wire [31:0] node2_inst_in,
-    input wire [31:0] node2_d_in,
+    input wire [63:0] node2_d_in,
     output wire [31:0] node2_pc_out,
-    output wire [31:0] node2_d_out,
+    output wire [63:0] node2_d_out,
     output wire [31:0] node2_addr_out,
     output wire node2_memWrEn,
     output wire node2_memEn,
 
     // Core 3
     input wire [31:0] node3_inst_in,
-    input wire [31:0] node3_d_in,
+    input wire [63:0] node3_d_in,
     output wire [31:0] node3_pc_out,
-    output wire [31:0] node3_d_out,
+    output wire [63:0] node3_d_out,
     output wire [31:0] node3_addr_out,
     output wire node3_memWrEn,
     output wire node3_memEn

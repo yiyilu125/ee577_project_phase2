@@ -1,10 +1,10 @@
 
  module alu ( //this alu may contains SFU
       input  opcode,
-      input [64:0]data1,
-      input [64:0]data2,
+      input [63:0]data1,
+      input [63:0]data2,
 	  input [1:0] ww,
-      output reg [64:0]result,
+      output reg [63:0]result,
 	  output reg divide_by_0
  );
 

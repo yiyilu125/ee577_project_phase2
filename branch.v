@@ -2,9 +2,9 @@ module branch (
     input clk,
     input reset,
     input [1:0] branch,             // 2-bit branch signal: 00 or 01 for No Branch, 10 for BEZ, 11 for BNEZ
-    input [31:0] branch_target,     // Target address for the branch
+    input [15:0] branch_target,     // Target address for the branch
     input [63:0] data_branch,       // Data from register to check for branch condition
-    output reg [31:0] target_address, // Address to jump to if branch is taken
+    output reg [15:0] target_address, // Address to jump to if branch is taken
     output reg taken,               // Indicates if branch is taken
     output reg flush                // Flush signal if branch is taken
 );
