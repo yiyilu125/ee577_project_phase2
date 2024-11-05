@@ -2,8 +2,9 @@ module pipeline #(
     parameter INSTRUCTION_WIDTH = 32,
     parameter DATA_WIDTH = 64,
     parameter REG_ADDRESS_LENGTH = 5,
-    parameter OPCODE_LENGTH = 5,
-    parameter IMMEDIATE_ADDRESS_LENGTH = 16
+    parameter OPCODE_LENGTH = 6,
+    parameter IMMEDIATE_ADDRESS_LENGTH = 16,
+    parameter DMEM_ADDRESS_LENGTH = 16
 )(
     input clk, rst,
     input [INSTRUCTION_WIDTH-1:0] imem_instruction,
@@ -42,8 +43,8 @@ module pipeline #(
 	
     wire [DATA_WIDTH-1:0] reg_data1, reg_data2;
     wire [DATA_WIDTH-1:0] mux_rA_data, mux_rB_data;
-    wire [4:0] opcode;  // fix 31->4
-    wire [INSTRUCTION_WIDTH-1:0] datamem_address;
+    wire [OPCODE_LENGTH-1:0] opcode;  // fix 31->4
+    wire [DMEM_ADDRESS_LENGTH-1:0] datamem_address;
     wire mux_ctrl_rA;
     wire mux_ctrl_rB;
     wire store_en, load_en;
