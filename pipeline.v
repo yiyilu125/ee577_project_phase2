@@ -20,7 +20,7 @@ module pipeline #(
     reg [INSTRUCTION_WIDTH-1:0] s1_reg_instruction;
     //wire
     wire flush_sig;
-    wire [INSTRUCTION_WIDTH-1:0] target_address;
+    wire [IMMEDIATE_ADDRESS_LENGTH-1:0] target_address;
     wire taken_sig;
 
     /*stage 2: ID, wire*/
