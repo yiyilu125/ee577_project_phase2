@@ -12,13 +12,6 @@ Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
 Top level modules:
 	DW_div
 
-} {} {}} C:/ee577_project_phase2/Decoder.v {1 {vlog -work work -vopt -stats=none {C:\ee577_project_phase2\Decoder.v}
-Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
--- Compiling module instruction_decoder
-
-Top level modules:
-	instruction_decoder
-
 } {} {}} C:/ee577_project_phase2/branch.v {1 {vlog -work work -vopt -stats=none C:/ee577_project_phase2/branch.v
 Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
 -- Compiling module branch
@@ -145,13 +138,6 @@ Top level modules:
 	XOR2X1
 	tb_cmp
 
-} {} {}} C:/ee577_project_phase2/pipeline.v {1 {vlog -work work -vopt -stats=none {C:\ee577_project_phase2\pipeline.v}
-Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
--- Compiling module pipeline
-
-Top level modules:
-	pipeline
-
 } {} {}} C:/ee577_project_phase2/regfile.v {1 {vlog -work work -vopt -stats=none {C:\ee577_project_phase2\regfile.v}
 Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
 -- Compiling module register_file
@@ -159,12 +145,26 @@ Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
 Top level modules:
 	register_file
 
+} {} {}} C:/ee577_project_phase2/pipeline.v {1 {vlog -work work -vopt -stats=none {C:\ee577_project_phase2\pipeline.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module pipeline
+
+Top level modules:
+	pipeline
+
 } {} {}} C:/ee577_project_phase2/ALU_tb.v {1 {vlog -work work -vopt -stats=none {C:\ee577_project_phase2\ALU_tb.v}
 Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
 -- Compiling module alu_tb
 
 Top level modules:
 	alu_tb
+
+} {} {}} C:/ee577_project_phase2/cmp.v {1 {vlog -work work -vopt -stats=none {C:\ee577_project_phase2\cmp.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module cardinal_cmp
+
+Top level modules:
+	cardinal_cmp
 
 } {} {}} C:/ee577_project_phase2/mux_2.v {1 {vlog -work work -vopt -stats=none C:/ee577_project_phase2/mux_2.v
 Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018

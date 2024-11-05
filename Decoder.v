@@ -102,7 +102,7 @@ always @(*) begin
             RegisterB = 0; // Extract Register B 0
             HDU_A = instruction[25:21]; // Set Hazard Detection Unit input A to Register A
             HDU_B = 0; // Set Hazard Detection Unit input B to Register B
-			arithmatic_RD = 0; // Set destination register for arithmetic result
+			arithmatic_RD =  instruction[25:21]; // Set destination register for arithmetic result
 			
 			
 			BR = 0; // No branch          
@@ -122,7 +122,7 @@ always @(*) begin
         end
         6'b100001: 
         begin // M-type instructions SW
-            RegisterA = 0; // Extract Register A address from bits 25-21
+            RegisterA = instruction[25:21]; // Extract Register A address from bits 25-21
             RegisterB = 0; // Extract Register B 0
             HDU_A = instruction[25:21]; // Set Hazard Detection Unit input A to Register A
             HDU_B = 0; // Set Hazard Detection Unit input B to Register B

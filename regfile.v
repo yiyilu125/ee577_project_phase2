@@ -35,6 +35,7 @@ module register_file (
                 regfile[i] <= 64'b0;
             end
         end else if (writen_en && write_address != 5'b00000) begin
+			$display ("hhhhh");
             regfile[write_address] <= data_in;
         end 
     end
