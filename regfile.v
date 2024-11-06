@@ -6,6 +6,7 @@ module register_file (
     input writen_en,               // write back enable
     input [4:0] write_address,     // 5-bit address for 32 registers
     input [63:0] data_in,
+    input [2:0] ppp,                // participation bits
     output reg [63:0] data_out1,
     output reg [63:0] data_out2
 );
@@ -35,8 +36,29 @@ module register_file (
                 regfile[i] <= 64'b0;
             end
         end else if (writen_en && write_address != 5'b00000) begin
-			// $display ("hhhhh");
-            regfile[write_address] <= data_in;
+			case (ppp) 
+                3'b000: begin 
+                    regfile[write_address] <= data_in;
+                end
+                3'b001: begin
+                    regfile[write_address][63:32] <= data_in[63:32];
+                end
+                3'b010: begin
+                    regfile[write_address][31:0] <= data_in[31:0];
+                end
+                3'b011: begin
+                    regfile[write_address][63:56] <= data_in[63:56];
+                    regfile[write_address][47:40] <= data_in[47:40];
+                    regfile[write_address][31:24] <= data_in[31:24];
+                    regfile[write_address][15:8 ] <= data_in[15:8 ];
+                end
+                3'b100: begin
+                    regfile[write_address][55:48] <= data_in[55:48];
+                    regfile[write_address][39:32] <= data_in[39:32];
+                    regfile[write_address][23:16] <= data_in[23:16];
+                    regfile[write_address][7 :0 ] <= data_in[7 :0 ];
+                end
+            endcase
         end 
     end
 
