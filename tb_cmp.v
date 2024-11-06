@@ -204,10 +204,12 @@ begin
 	/*$readmemh("cmp_test.dmem.0.fill", DM_node0.MEM); 	// loading data memory into node0
 	$readmemh("cmp_test.dmem.1.fill", DM_node1.MEM); 	// loading data memory into node1
 	$readmemh("cmp_test.dmem.2.fill", DM_node2.MEM); 	// loading data memory into node2
-	$readmemh("cmp_test.dmem.3.fill", DM_node3.MEM); 	// loading data memory into node3
+	$readmemh("cmp_test.dmem.3.fill", DM_node3.MEM); 	// loading data memory into node3.
 	*/
 	
-	$readmemh("dmem.fill", DM_node0.MEM);           //-Loading data memory into nodeR ??????????????????????????????????????????????
+	$readmemh("dmem.fill", DM_node0.MEM);          
+	
+	
 	/*$readmemh("./test_cases/dmen.fi11", DM_node1.MEM); //-loading data memory into node1
 	$readmemh("./test_cases/dmen.fi11", DM_node2.MEM); //-loading data memory into node2
 	$readmemh("./test cases/dmen.fi11", DM_node3.MEM); //-loading data memory into node3*/

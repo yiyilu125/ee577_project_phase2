@@ -2,7 +2,7 @@ module instruction_decoder (
     input [31:0] instruction,
     output reg [4:0] RegisterA, // address of oprA
     output reg [4:0] RegisterB, // address of oprB
-    output reg [4:0] WW, // Write Width field from instruction
+    output reg [1:0] WW, // Write Width field from instruction
     output reg [5:0] operation, // Operation code from instruction
     output reg [4:0] arithmatic_RD, // Arithmetic result destination register
 	
@@ -17,7 +17,9 @@ module instruction_decoder (
 	output reg mem_Enable,
 	
 	output reg writen_en,	
-	output reg load_signal
+	output reg load_signal,
+	
+	output reg [2:0]ppp
 	
 );
 
@@ -37,8 +39,11 @@ always @(*) begin
 			
 			MEM_addr = 0; // Not applicable for R-type
 			writen_en=1'b1;
+			ppp=instruction[10:8]
 			
-            WW = instruction[10:6]; // Extract Write Width from bits 10-6
+			
+			
+            WW = instruction[7:6]; // Extract Write Width from bits 10-6
             operation = instruction[5:0]; // Extract operation code from bits 5-0
            
             
@@ -63,7 +68,10 @@ always @(*) begin
             Branch_immediate = instruction[15:0]; // No immediate value for branch
 			
 			MEM_addr = 0; // Not applicable for R-type
-			writen_en=1'b1;
+			writen_en=1'b0;
+			ppp=instruction[10:8]
+			
+			
 			
             WW =0; // Extract Write Width from bits 10-6
             operation = 0; // Extract operation code from bits 5-0
@@ -86,8 +94,8 @@ always @(*) begin
             Branch_immediate = instruction[15:0]; // No immediate value for branch
 			
 			MEM_addr = 0; // Not applicable for R-type
-			writen_en=1'b1;
-			
+			writen_en=1'b0;
+			ppp=instruction[10:8]
             WW =0; // Extract Write Width from bits 10-6
             operation = 0; // Extract operation code from bits 5-0
                    
@@ -110,7 +118,7 @@ always @(*) begin
 			
 			MEM_addr = instruction[15:0]; // Not applicable for R-type
 			writen_en=1;
-			
+			ppp=instruction[10:8]
             WW =0; // Extract Write Width from bits 10-6
             operation = 0; // Extract operation code from bits 5-0
                    
@@ -134,7 +142,7 @@ always @(*) begin
 			
 			MEM_addr = instruction[15:0]; // Not applicable for R-type
 			writen_en=0;
-			
+			ppp=instruction[10:8]
             WW =0; // Extract Write Width from bits 10-6
             operation = 0; // Extract operation code from bits 5-0
                    
@@ -157,7 +165,7 @@ always @(*) begin
 			
 			MEM_addr = 0; // Not applicable for R-type
 			writen_en=0;
-			
+			ppp=instruction[10:8]
             WW =0; // Extract Write Width from bits 10-6
             operation = 0; // Extract operation code from bits 5-0
                    
