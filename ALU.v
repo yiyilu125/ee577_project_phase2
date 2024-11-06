@@ -250,7 +250,8 @@
 	begin
         result = 65'b0; // Default result to 0
 		
-		 if (opcode == VAND) begin
+		 if (opcode == VAND) 
+		 begin
             case (ww)
                 2'b00: 
 				begin // 8-bit AND, each segment is 8 bits
@@ -262,6 +263,7 @@
                     result[47:40]  = data1[47:40] & data2[47:40];
                     result[55:48]  = data1[55:48] & data2[55:48];
                     result[63:56]  = data1[63:56] & data2[63:56];
+					$display("8bit current data1=%b:,current data2=%b:, result=%h",data1,data2,result);
                 end
                 2'b01: 
 				begin // 16-bit AND, each segment is 16 bits
@@ -269,15 +271,18 @@
                     result[31:16]  = data1[31:16] & data2[31:16];
                     result[47:32]  = data1[47:32] & data2[47:32];
                     result[63:48]  = data1[63:48] & data2[63:48];
+					$display("16 bit current data1=%b:,current data2=%b, result=%h:",data1,data2,result);
                 end
                 2'b10: 
 				begin // 32-bit AND, each segment is 32 bits
                     result[31:0]   = data1[31:0] & data2[31:0];
                     result[63:32]  = data1[63:32] & data2[63:32];
+					$display("32 bit current data1=%b:,current data2=%b:, result=%h",data1,data2,result);
                 end
                 2'b11: 
 				begin // 64-bit AND, entire 64-bit word
                     result = data1 & data2;
+					$display("64 bit current data1=%b:,current data2=%b:, result=%h",data1,data2,result);
                 end
                 default: result = 64'b0; // Handle invalid ww values
             endcase
