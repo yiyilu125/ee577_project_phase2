@@ -38,6 +38,7 @@ module register_file (
         end else if (writen_en && write_address != 5'b00000) begin
 			case (ppp) 
                 3'b000: begin 
+					$display("test");
                     regfile[write_address] <= data_in;
                 end
                 3'b001: begin

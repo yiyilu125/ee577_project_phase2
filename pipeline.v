@@ -134,7 +134,8 @@ module pipeline #(
         .read_address1(read_address1),
         .read_address2(read_address2),
         .data_out1(reg_data1),
-        .data_out2(reg_data2)
+        .data_out2(reg_data2),
+		.ppp(s3_reg_ppp)
     );
 
     //forwarding unit mux
