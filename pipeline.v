@@ -29,10 +29,12 @@ module pipeline #(
     reg [REG_ADDRESS_LENGTH-1:0] s2_reg_rd_address;
     reg [DATA_WIDTH-1:0] s2_reg_data1, s2_reg_data2;
     reg [5:0] s2_opcode; 
-	reg [4:0] s2_ww;	// width of arithmatic operation at S2
+	reg [1:0] s2_ww;	// width of arithmatic operation at S2
     reg s2_reg_dmem_load_signal;
+    reg [2:0] s2_reg_ppp;
     /*wire*/
-	wire [4:0] ww; //width of arithmatic operation at S2
+	wire [1:0] ww; //width of arithmatic operation at S2
+    wire [2:0] ppp;
     wire wire_writen_en;
     wire [REG_ADDRESS_LENGTH-1:0] wire_rd_address;
     wire [REG_ADDRESS_LENGTH-1:0] read_address1, read_address2; // change 31bit to 5bit
@@ -56,6 +58,7 @@ module pipeline #(
     reg s3_reg_write_en;
     reg [REG_ADDRESS_LENGTH-1:0] s3_reg_rd_address;
     reg [DATA_WIDTH-1:0] s3_reg_result;
+    reg [2:0] s3_reg_ppp;
     //wire
     wire [DATA_WIDTH-1:0] alu_result;
     wire [DATA_WIDTH-1:0] mux_result;
@@ -104,6 +107,7 @@ module pipeline #(
 		
         .WW(ww),  // output: port for width of arithmatic operation
         .operation(opcode), // output: port for operation kinds
+        .ppp(ppp),
 
         .store_Enable(store_enable),
         .mem_Enable(mem_enable),
@@ -173,7 +177,8 @@ module pipeline #(
         s2_reg_data1 <= mux_rA_data;
         s2_reg_data2 <= mux_rB_data;
         s2_opcode <= opcode;
-		s2_ww<=ww; //Width of operation	
+		s2_ww <= ww; //Width of operation	
+        s2_reg_ppp <= ppp;
         s2_reg_dmem_load_signal <= dmem_load_signal;
     end
 
@@ -199,6 +204,7 @@ module pipeline #(
         s3_reg_write_en <= s2_reg_writen_en;
         s3_reg_rd_address <= s2_reg_rd_address;
         s3_reg_result <= mux_result;
+        s3_reg_ppp <= s2_reg_ppp;
     end
 
     /******************************stage 4: WB******************************/
