@@ -39,7 +39,7 @@ always @(*) begin
 			
 			MEM_addr = 0; // Not applicable for R-type
 			writen_en=1'b1;
-			ppp=instruction[10:8]
+			ppp=instruction[10:8];
 			
 			
 			
@@ -69,7 +69,7 @@ always @(*) begin
 			
 			MEM_addr = 0; // Not applicable for R-type
 			writen_en=1'b0;
-			ppp=instruction[10:8]
+			ppp=instruction[10:8];
 			
 			
 			
@@ -95,7 +95,7 @@ always @(*) begin
 			
 			MEM_addr = 0; // Not applicable for R-type
 			writen_en=1'b0;
-			ppp=instruction[10:8]
+			ppp=instruction[10:8];
             WW =0; // Extract Write Width from bits 10-6
             operation = 0; // Extract operation code from bits 5-0
                    
@@ -118,7 +118,7 @@ always @(*) begin
 			
 			MEM_addr = instruction[15:0]; // Not applicable for R-type
 			writen_en=1;
-			ppp=instruction[10:8]
+			ppp=instruction[10:8];
             WW =0; // Extract Write Width from bits 10-6
             operation = 0; // Extract operation code from bits 5-0
                    
@@ -142,7 +142,7 @@ always @(*) begin
 			
 			MEM_addr = instruction[15:0]; // Not applicable for R-type
 			writen_en=0;
-			ppp=instruction[10:8]
+			ppp=instruction[10:8];
             WW =0; // Extract Write Width from bits 10-6
             operation = 0; // Extract operation code from bits 5-0
                    
@@ -165,8 +165,8 @@ always @(*) begin
 			
 			MEM_addr = 0; // Not applicable for R-type
 			writen_en=0;
-			ppp=instruction[10:8]
-            WW =0; // Extract Write Width from bits 10-6
+			ppp=instruction[10:8];
+            WW =0; // Extract Write; Width from bits 10-6
             operation = 0; // Extract operation code from bits 5-0
                    
         
