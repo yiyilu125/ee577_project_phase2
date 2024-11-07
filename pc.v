@@ -10,7 +10,7 @@ module program_counter (
         if (reset) begin
             ins_address <= 32'b0;
         end else if (branch_en) begin
-            ins_address <= ins_address + branch_target;
+            ins_address <= branch_target;
         end else begin
             ins_address <= ins_address + 4;
         end
