@@ -16,13 +16,13 @@ module register_file (
 
     // Read logic (combinational)
     always @(*) begin
-        if (writen_en && (write_address == read_address1)) begin
+        if (writen_en && (write_address == read_address1) && write_address != 5'b00000) begin
             data_out1 = data_in;
         end else begin
             data_out1 = regfile[read_address1];
         end
 
-        if (writen_en && (write_address == read_address2)) begin
+        if (writen_en && (write_address == read_address2) && write_address != 5'b00000) begin
             data_out2 = data_in;
         end else begin 
             data_out2 = regfile[read_address2];
@@ -57,6 +57,9 @@ module register_file (
                     regfile[write_address][39:32] <= data_in[39:32];
                     regfile[write_address][23:16] <= data_in[23:16];
                     regfile[write_address][7 :0 ] <= data_in[7 :0 ];
+                end
+                default: begin
+                    $display("Not a legal ppp signal!")
                 end
             endcase
         end 
