@@ -46,7 +46,7 @@ module pipeline #(
     wire [DATA_WIDTH-1:0] reg_data1, reg_data2;
     wire [DATA_WIDTH-1:0] mux_rA_data, mux_rB_data;
     wire [5:0] opcode;  // fix 31->4
-   // wire [OPCODE_LENGTH-1:0] opcode; 
+    // wire [OPCODE_LENGTH-1:0] opcode; 
     wire [DMEM_ADDRESS_LENGTH-1:0] datamem_address;
     wire mux_ctrl_rA;
     wire mux_ctrl_rB;

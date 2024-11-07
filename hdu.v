@@ -1,11 +1,9 @@
-
+/*no stall needed in our design, it works like a forward uniy controller. When RA/RB is equal to the latest RD, it will forward the data. Except RD == 0*/
 module hdu # (
     parameter REG_ADDRESS_LENGTH = 5,
     parameter OPCODE_LENGTH = 5
 )(
     input [REG_ADDRESS_LENGTH-1:0] current_RA, current_RB, Lasttime_RD,
-    // input [OPCODE_LENGTH-1:0] opcode,
-    // output stall,
     output mux_ctrl_rA,
     output mux_ctrl_rB
 );
