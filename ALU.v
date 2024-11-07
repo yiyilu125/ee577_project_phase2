@@ -1,12 +1,12 @@
 
  module alu ( //this alu may contains SFU
       input  [5:0]opcode,
-      input [63:0]data1,
-      input [63:0]data2,
-	  input [1:0] ww,
-      output reg [63:0]result
+      input [0:63]data1,
+      input [0:63]data2,
+	  output reg [0:63]result,
+	  input [1:0] ww
+     
  );
-
 
 	parameter VAND   = 6'b000001; // AND
 	parameter VOR    = 6'b000010; // OR
@@ -27,21 +27,45 @@
 	parameter VSQOU  = 6'b010001; // Square
 	parameter VSQRT  = 6'b010010; // Square Root
 	
+	
+	
+	
+	
+   
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	reg divide_by_0;
 	
 //----------------------------------------------------------------------------------- Division Define
 	 // Intermediate signals for each segment
-    wire [7:0] quotient_8bit_0, quotient_8bit_1, quotient_8bit_2, quotient_8bit_3, quotient_8bit_4, quotient_8bit_5, quotient_8bit_6, quotient_8bit_7;
-    wire [15:0] quotient_16bit_0, quotient_16bit_1, quotient_16bit_2, quotient_16bit_3;
-    wire [31:0] quotient_32bit_0, quotient_32bit_1;
-    wire [63:0] quotient_64bit;
+    wire [0:7] quotient_8bit_0, quotient_8bit_1, quotient_8bit_2, quotient_8bit_3, quotient_8bit_4, quotient_8bit_5, quotient_8bit_6, quotient_8bit_7;
+    wire [0:15] quotient_16bit_0, quotient_16bit_1, quotient_16bit_2, quotient_16bit_3;
+    wire [0:31] quotient_32bit_0, quotient_32bit_1;
+    wire [0:63] quotient_64bit;
 	
 	
 	   // Intermediate signals for each segment's remainder and divide_by_0
-    wire [7:0] remainder_8bit_0, remainder_8bit_1, remainder_8bit_2, remainder_8bit_3, remainder_8bit_4, remainder_8bit_5, remainder_8bit_6, remainder_8bit_7;
-    wire [15:0] remainder_16bit_0, remainder_16bit_1, remainder_16bit_2, remainder_16bit_3;
-    wire [31:0] remainder_32bit_0, remainder_32bit_1;
-    wire [63:0] remainder_64bit;
+    wire [0:7] remainder_8bit_0, remainder_8bit_1, remainder_8bit_2, remainder_8bit_3, remainder_8bit_4, remainder_8bit_5, remainder_8bit_6, remainder_8bit_7;
+    wire [0:15] remainder_16bit_0, remainder_16bit_1, remainder_16bit_2, remainder_16bit_3;
+    wire [0:31] remainder_32bit_0, remainder_32bit_1;
+    wire [0:63] remainder_64bit;
 	
 	
 	
@@ -58,55 +82,55 @@
 	
     // 8-bit division instances for each 8-bit segment
     DW_div #(.a_width(8), .b_width(8), .tc_mode(0), .rem_mode(1)) div_8bit_0 (
-        .a(data1[7:0]), .b(data2[7:0]), .quotient(quotient_8bit_0), .remainder(remainder_8bit_0), .divide_by_0(div_by_0_8bit_0)
+        .a(data1[0:7]), .b(data2[0:7]), .quotient(quotient_8bit_0), .remainder(remainder_8bit_0), .divide_by_0(div_by_0_8bit_0)
     );
     DW_div #(.a_width(8), .b_width(8), .tc_mode(0), .rem_mode(1)) div_8bit_1 (
-        .a(data1[15:8]), .b(data2[15:8]), .quotient(quotient_8bit_1), .remainder(remainder_8bit_1), .divide_by_0(div_by_0_8bit_1)
+        .a(data1[8:15]), .b(data2[8:15]), .quotient(quotient_8bit_1), .remainder(remainder_8bit_1), .divide_by_0(div_by_0_8bit_1)
     );
     DW_div #(.a_width(8), .b_width(8), .tc_mode(0), .rem_mode(1)) div_8bit_2 (
-        .a(data1[23:16]), .b(data2[23:16]), .quotient(quotient_8bit_2), .remainder(remainder_8bit_2), .divide_by_0(div_by_0_8bit_2)
+        .a(data1[16:23]), .b(data2[16:23]), .quotient(quotient_8bit_2), .remainder(remainder_8bit_2), .divide_by_0(div_by_0_8bit_2)
     );
     DW_div #(.a_width(8), .b_width(8), .tc_mode(0), .rem_mode(1)) div_8bit_3 (
-        .a(data1[31:24]), .b(data2[31:24]), .quotient(quotient_8bit_3), .remainder(remainder_8bit_3), .divide_by_0(div_by_0_8bit_3)
+        .a(data1[24:31]), .b(data2[24:31]), .quotient(quotient_8bit_3), .remainder(remainder_8bit_3), .divide_by_0(div_by_0_8bit_3)
     );
     DW_div #(.a_width(8), .b_width(8), .tc_mode(0), .rem_mode(1)) div_8bit_4 (
-        .a(data1[39:32]), .b(data2[39:32]), .quotient(quotient_8bit_4), .remainder(remainder_8bit_4), .divide_by_0(div_by_0_8bit_4)
+        .a(data1[32:39]), .b(data2[32:39]), .quotient(quotient_8bit_4), .remainder(remainder_8bit_4), .divide_by_0(div_by_0_8bit_4)
     );
     DW_div #(.a_width(8), .b_width(8), .tc_mode(0), .rem_mode(1)) div_8bit_5 (
-        .a(data1[47:40]), .b(data2[47:40]), .quotient(quotient_8bit_5), .remainder(remainder_8bit_5), .divide_by_0(div_by_0_8bit_5)
+        .a(data1[40:47]), .b(data2[40:47]), .quotient(quotient_8bit_5), .remainder(remainder_8bit_5), .divide_by_0(div_by_0_8bit_5)
     );
     DW_div #(.a_width(8), .b_width(8), .tc_mode(0), .rem_mode(1)) div_8bit_6 (
-        .a(data1[55:48]), .b(data2[55:48]), .quotient(quotient_8bit_6), .remainder(remainder_8bit_6), .divide_by_0(div_by_0_8bit_6)
+        .a(data1[48:55]), .b(data2[48:55]), .quotient(quotient_8bit_6), .remainder(remainder_8bit_6), .divide_by_0(div_by_0_8bit_6)
     );
     DW_div #(.a_width(8), .b_width(8), .tc_mode(0), .rem_mode(1)) div_8bit_7 (
-        .a(data1[63:56]), .b(data2[63:56]), .quotient(quotient_8bit_7), .remainder(remainder_8bit_7), .divide_by_0(div_by_0_8bit_7)
+        .a(data1[56:63]), .b(data2[56:63]), .quotient(quotient_8bit_7), .remainder(remainder_8bit_7), .divide_by_0(div_by_0_8bit_7)
     );
 
     // 16-bit division instances for each 16-bit segment
     DW_div #(.a_width(16), .b_width(16), .tc_mode(0), .rem_mode(1)) div_16bit_0 (
-        .a(data1[15:0]), .b(data2[15:0]), .quotient(quotient_16bit_0), .remainder(remainder_16bit_0), .divide_by_0(div_by_0_16bit_0)
+        .a(data1[0:15]), .b(data2[0:15]), .quotient(quotient_16bit_0), .remainder(remainder_16bit_0), .divide_by_0(div_by_0_16bit_0)
     );
     DW_div #(.a_width(16), .b_width(16), .tc_mode(0), .rem_mode(1)) div_16bit_1 (
-        .a(data1[31:16]), .b(data2[31:16]), .quotient(quotient_16bit_1), .remainder(remainder_16bit_1), .divide_by_0(div_by_0_16bit_1)
+        .a(data1[16:31]), .b(data2[16:31]), .quotient(quotient_16bit_1), .remainder(remainder_16bit_1), .divide_by_0(div_by_0_16bit_1)
     );
     DW_div #(.a_width(16), .b_width(16), .tc_mode(0), .rem_mode(1)) div_16bit_2 (
-        .a(data1[47:32]), .b(data2[47:32]), .quotient(quotient_16bit_2), .remainder(remainder_16bit_2), .divide_by_0(div_by_0_16bit_2)
+        .a(data1[32:47]), .b(data2[32:47]), .quotient(quotient_16bit_2), .remainder(remainder_16bit_2), .divide_by_0(div_by_0_16bit_2)
     );
     DW_div #(.a_width(16), .b_width(16), .tc_mode(0), .rem_mode(1)) div_16bit_3 (
-        .a(data1[63:48]), .b(data2[63:48]), .quotient(quotient_16bit_3), .remainder(remainder_16bit_3), .divide_by_0(div_by_0_16bit_3)
+        .a(data1[48:63]), .b(data2[48:63]), .quotient(quotient_16bit_3), .remainder(remainder_16bit_3), .divide_by_0(div_by_0_16bit_3)
     );
 
     // 32-bit division instances for each 32-bit segment
     DW_div #(.a_width(32), .b_width(32), .tc_mode(0), .rem_mode(1)) div_32bit_0 (
-        .a(data1[31:0]), .b(data2[31:0]), .quotient(quotient_32bit_0), .remainder(remainder_32bit_0), .divide_by_0(div_by_0_32bit_0)
+        .a(data1[0:31]), .b(data2[0:31]), .quotient(quotient_32bit_0), .remainder(remainder_32bit_0), .divide_by_0(div_by_0_32bit_0)
     );
     DW_div #(.a_width(32), .b_width(32), .tc_mode(0), .rem_mode(1)) div_32bit_1 (
-        .a(data1[63:32]), .b(data2[63:32]), .quotient(quotient_32bit_1), .remainder(remainder_32bit_1), .divide_by_0(div_by_0_32bit_1)
+        .a(data1[32:63]), .b(data2[32:63]), .quotient(quotient_32bit_1), .remainder(remainder_32bit_1), .divide_by_0(div_by_0_32bit_1)
     );
 
     // 64-bit division instance
     DW_div #(.a_width(64), .b_width(64), .tc_mode(0), .rem_mode(1)) div_64bit (
-        .a(data1[63:0]), .b(data2[63:0]), .quotient(quotient_64bit), .remainder(remainder_64bit), .divide_by_0(div_by_0_64bit)
+        .a(data1[0:63]), .b(data2[0:63]), .quotient(quotient_64bit), .remainder(remainder_64bit), .divide_by_0(div_by_0_64bit)
     );
 	
 	
@@ -114,35 +138,35 @@
 
 // sqaure design ware 
    // Intermediate signals for each segment's square result
-    wire [15:0] square_8bit_0, square_8bit_2, square_8bit_4, square_8bit_6;
-    wire [31:0] square_16bit_0, square_16bit_2;
-    wire [63:0] square_32bit_0;
+    wire [0:15] square_8bit_0, square_8bit_2, square_8bit_4, square_8bit_6;
+    wire [0:31] square_16bit_0, square_16bit_2;
+    wire [0:63] square_32bit_0;
 
     // 8-bit square instances for each even 8-bit segment
     DW_square #(.width(8)) square_8bit_0_u (
-        .a(data1[7:0]), .tc(1'b0), .square(square_8bit_0)
+        .a(data1[0:7]), .tc(1'b0), .square(square_8bit_0)
     );
     DW_square #(.width(8)) square_8bit_2_u (
-        .a(data1[23:16]), .tc(1'b0), .square(square_8bit_2)
+        .a(data1[16:23]), .tc(1'b0), .square(square_8bit_2)
     );
     DW_square #(.width(8)) square_8bit_4_u (
-        .a(data1[39:32]), .tc(1'b0), .square(square_8bit_4)
+        .a(data1[32:39]), .tc(1'b0), .square(square_8bit_4)
     );
     DW_square #(.width(8)) square_8bit_6_u (
-        .a(data1[55:48]), .tc(1'b0), .square(square_8bit_6)
+        .a(data1[48:55]), .tc(1'b0), .square(square_8bit_6)
     );
 
     // 16-bit square instances for each even 16-bit segment
     DW_square #(.width(16)) square_16bit_0_u (
-        .a(data1[15:0]), .tc(1'b0), .square(square_16bit_0)
+        .a(data1[0:15]), .tc(1'b0), .square(square_16bit_0)
     );
     DW_square #(.width(16)) square_16bit_2_u (
-        .a(data1[47:32]), .tc(1'b0), .square(square_16bit_2)
+        .a(data1[32:47]), .tc(1'b0), .square(square_16bit_2)
     );
 
     // 32-bit square instance for the even 32-bit segment
     DW_square #(.width(32)) square_32bit_0_u (
-        .a(data1[31:0]), .tc(1'b0), .square(square_32bit_0)
+        .a(data1[0:31]), .tc(1'b0), .square(square_32bit_0)
     );
 	
 	
@@ -153,131 +177,138 @@
 	
 	 // 8-bit square instances for each odd 8-bit segment
 	 
-	wire [15:0] square_8bit_1, square_8bit_3, square_8bit_5, square_8bit_7;
-    wire [31:0] square_16bit_1, square_16bit_3;
-    wire [63:0] square_32bit_1;
+	wire [0:15] square_8bit_1, square_8bit_3, square_8bit_5, square_8bit_7;
+    wire [0:31] square_16bit_1, square_16bit_3;
+    wire [0:63] square_32bit_1;
 	
 	
 	
     DW_square #(.width(8)) square_8bit_1_u (
-        .a(data1[15:8]), .tc(1'b0), .square(square_8bit_1)
+        .a(data1[8:15]), .tc(1'b0), .square(square_8bit_1)
     );
     DW_square #(.width(8)) square_8bit_3_u (
-        .a(data1[31:24]), .tc(1'b0), .square(square_8bit_3)
+        .a(data1[24:31]), .tc(1'b0), .square(square_8bit_3)
     );
     DW_square #(.width(8)) square_8bit_5_u (
-        .a(data1[47:40]), .tc(1'b0), .square(square_8bit_5)
+        .a(data1[40:47]), .tc(1'b0), .square(square_8bit_5)
     );
     DW_square #(.width(8)) square_8bit_7_u (
-        .a(data1[63:56]), .tc(1'b0), .square(square_8bit_7)
+        .a(data1[56:63]), .tc(1'b0), .square(square_8bit_7)
     );
 
     // 16-bit square instances for each odd 16-bit segment
     DW_square #(.width(16)) square_16bit_1_u (
-        .a(data1[31:16]), .tc(1'b0), .square(square_16bit_1)
+        .a(data1[16:31]), .tc(1'b0), .square(square_16bit_1)
     );
     DW_square #(.width(16)) square_16bit_3_u (
-        .a(data1[63:48]), .tc(1'b0), .square(square_16bit_3)
+        .a(data1[48:63]), .tc(1'b0), .square(square_16bit_3)
     );
 
     // 32-bit square instance for the odd 32-bit segment
     DW_square #(.width(32)) square_32bit_1_u (
-        .a(data1[63:32]), .tc(1'b0), .square(square_32bit_1)
+        .a(data1[32:63]), .tc(1'b0), .square(square_32bit_1)
     );
 	
 //--------------------------------------------------------------------------------------
 
 // sqaure root design ware
-	wire [3:0] root_8bit_0, root_8bit_1, root_8bit_2, root_8bit_3,root_8bit_4, root_8bit_5, root_8bit_6, root_8bit_7;
-    wire [7:0] root_16bit_0, root_16bit_1, root_16bit_2, root_16bit_3;
-    wire [15:0] root_32bit_0, root_32bit_1;
-    wire [31:0] root_64bit;
+	wire [0:3] root_8bit_0, root_8bit_1, root_8bit_2, root_8bit_3,root_8bit_4, root_8bit_5, root_8bit_6, root_8bit_7;
+    wire [0:7] root_16bit_0, root_16bit_1, root_16bit_2, root_16bit_3;
+    wire [0:15] root_32bit_0, root_32bit_1;
+    wire [0:31] root_64bit;
 
     // 8-bit square root instances for each 8-bit segment
     DW_sqrt #(.width(8)) sqrt_8bit_0 (
-        .a(data1[7:0]), .root(root_8bit_0)
+        .a(data1[0:7]), .root(root_8bit_0)
     );
     DW_sqrt #(.width(8)) sqrt_8bit_1 (
-        .a(data1[15:8]), .root(root_8bit_1)
+        .a(data1[8:15]), .root(root_8bit_1)
     );
     DW_sqrt #(.width(8)) sqrt_8bit_2 (
-        .a(data1[23:16]), .root(root_8bit_2)
+        .a(data1[16:23]), .root(root_8bit_2)
     );
     DW_sqrt #(.width(8)) sqrt_8bit_3 (
-        .a(data1[31:24]), .root(root_8bit_3)
+        .a(data1[24:31]), .root(root_8bit_3)
     );
     DW_sqrt #(.width(8)) sqrt_8bit_4 (
-        .a(data1[39:32]), .root(root_8bit_4)
+        .a(data1[32:39]), .root(root_8bit_4)
     );
     DW_sqrt #(.width(8)) sqrt_8bit_5 (
-        .a(data1[47:40]), .root(root_8bit_5)
+        .a(data1[40:47]), .root(root_8bit_5)
     );
     DW_sqrt #(.width(8)) sqrt_8bit_6 (
-        .a(data1[55:48]), .root(root_8bit_6)
+        .a(data1[48:55]), .root(root_8bit_6)
     );
     DW_sqrt #(.width(8)) sqrt_8bit_7 (
-        .a(data1[63:56]), .root(root_8bit_7)
+        .a(data1[56:63]), .root(root_8bit_7)
     );
 
     // 16-bit square root instances for each 16-bit segment
     DW_sqrt #(.width(16)) sqrt_16bit_0 (
-        .a(data1[15:0]), .root(root_16bit_0)
+        .a(data1[0:15]), .root(root_16bit_0)
     );
     DW_sqrt #(.width(16)) sqrt_16bit_1 (
-        .a(data1[31:16]), .root(root_16bit_1)
+        .a(data1[16:31]), .root(root_16bit_1)
     );
     DW_sqrt #(.width(16)) sqrt_16bit_2 (
-        .a(data1[47:32]), .root(root_16bit_2)
+        .a(data1[32:47]), .root(root_16bit_2)
     );
     DW_sqrt #(.width(16)) sqrt_16bit_3 (
-        .a(data1[63:48]), .root(root_16bit_3)
+        .a(data1[48:63]), .root(root_16bit_3)
     );
 
     // 32-bit square root instances for each 32-bit segment
     DW_sqrt #(.width(32)) sqrt_32bit_0 (
-        .a(data1[31:0]), .root(root_32bit_0)
+        .a(data1[0:31]), .root(root_32bit_0)
     );
     DW_sqrt #(.width(32)) sqrt_32bit_1 (
-        .a(data1[63:32]), .root(root_32bit_1)
+        .a(data1[32:63]), .root(root_32bit_1)
     );
 
     // 64-bit square root instance
     DW_sqrt #(.width(64)) sqrt_64bit (
-        .a(data1[63:0]), .root(root_64bit)
+        .a(data1[0:63]), .root(root_64bit)
     );	
+	
+	
 //------------------------------------------------------------------------------------	
 	always @(*) 
 	begin
-        result = 65'b0; // Default result to 0
+        result = 64'b0; // Default result to 0
 		
-		 if (opcode == VAND) begin
+		 if (opcode == VAND) 
+		 begin
             case (ww)
                 2'b00: 
 				begin // 8-bit AND, each segment is 8 bits
-                    result[7:0]    = data1[7:0] & data2[7:0];
-                    result[15:8]   = data1[15:8] & data2[15:8];
-                    result[23:16]  = data1[23:16] & data2[23:16];
-                    result[31:24]  = data1[31:24] & data2[31:24];
-                    result[39:32]  = data1[39:32] & data2[39:32];
-                    result[47:40]  = data1[47:40] & data2[47:40];
-                    result[55:48]  = data1[55:48] & data2[55:48];
-                    result[63:56]  = data1[63:56] & data2[63:56];
+                    result[0:7]    = data1[0:7] & data2[0:7];
+                    result[8:15]   = data1[8:15] & data2[8:15];
+                    result[16:23]  = data1[16:23] & data2[16:23];
+                    result[24:31]  = data1[24:31] & data2[24:31];
+                    result[32:39]  = data1[32:39] & data2[32:39];
+                    result[40:47]  = data1[40:47] & data2[40:47];
+                    result[48:55]  = data1[48:55] & data2[48:55];
+                    result[55:63]  = data1[55:63] & data2[55:63];
+					//$display("8bit current data1=%b:,current data2=%b:, result=%h",data1,data2,result);
                 end
                 2'b01: 
 				begin // 16-bit AND, each segment is 16 bits
-                    result[15:0]   = data1[15:0] & data2[15:0];
-                    result[31:16]  = data1[31:16] & data2[31:16];
-                    result[47:32]  = data1[47:32] & data2[47:32];
-                    result[63:48]  = data1[63:48] & data2[63:48];
+                    result[0:15]   = data1[0:15] & data2[0:15];
+                    result[16:31]  = data1[16:31] & data2[16:31];
+                    result[32:47]  = data1[32:47] & data2[32:47];
+                    result[48:63]  = data1[48:63] & data2[48:63];
+					//$display("16 bit current data1=%b:,current data2=%b, result=%h:",data1,data2,result);
                 end
                 2'b10: 
 				begin // 32-bit AND, each segment is 32 bits
-                    result[31:0]   = data1[31:0] & data2[31:0];
-                    result[63:32]  = data1[63:32] & data2[63:32];
+                    result[0:31]   = data1[0:31] & data2[0:31];
+                    result[32:63]  = data1[32:63] & data2[32:63];
+					//$display("32 bit current data1=%b:,current data2=%b:, result=%h",data1,data2,result);
                 end
                 2'b11: 
 				begin // 64-bit AND, entire 64-bit word
                     result = data1 & data2;
+					//$display("64 bit current data1=%b:,current data2=%b:, result=%h",data1,data2,result);
                 end
                 default: result = 64'b0; // Handle invalid ww values
             endcase
@@ -287,24 +318,24 @@
 		 begin
             case (ww)
                 2'b00: begin // 8-bit OR, each segment is 8 bits
-                    result[7:0]    = data1[7:0] | data2[7:0];
-                    result[15:8]   = data1[15:8] | data2[15:8];
-                    result[23:16]  = data1[23:16] | data2[23:16];
-                    result[31:24]  = data1[31:24] | data2[31:24];
-                    result[39:32]  = data1[39:32] | data2[39:32];
-                    result[47:40]  = data1[47:40] | data2[47:40];
-                    result[55:48]  = data1[55:48] | data2[55:48];
-                    result[63:56]  = data1[63:56] | data2[63:56];
+                    result[0:7]    = data1[0:7] | data2[0:7];
+                    result[8:15]   = data1[8:15] | data2[8:15];
+                    result[16:23]  = data1[16:23] | data2[16:23];
+                    result[24:31]  = data1[24:31] | data2[24:31];
+                    result[32:39]  = data1[32:39] | data2[32:39];
+                    result[40:47]  = data1[40:47] | data2[40:47];
+                    result[48:55]  = data1[48:55] | data2[48:55];
+                    result[55:63]  = data1[55:63] | data2[55:63];
                 end
                 2'b01: begin // 16-bit OR, each segment is 16 bits
-                    result[15:0]   = data1[15:0] | data2[15:0];
-                    result[31:16]  = data1[31:16] | data2[31:16];
-                    result[47:32]  = data1[47:32] | data2[47:32];
-                    result[63:48]  = data1[63:48] | data2[63:48];
+                    result[0:15]   = data1[0:15] | data2[0:15];
+                    result[16:31]  = data1[16:31] | data2[16:31];
+                    result[32:47]  = data1[32:47] | data2[32:47];
+                    result[48:63]  = data1[48:63] | data2[48:63];
                 end
                 2'b10: begin // 32-bit OR, each segment is 32 bits
-                    result[31:0]   = data1[31:0] | data2[31:0];
-                    result[63:32]  = data1[63:32] | data2[63:32];
+                    result[0:31]   = data1[0:31] | data2[0:31];
+                    result[32:63]  = data1[32:63] | data2[32:63];
                 end
                 2'b11: begin // 64-bit OR, entire 64-bit word
                     result = data1 | data2;
@@ -318,26 +349,26 @@
             case (ww)
                 2'b00: 
 				begin // 8-bit XOR, each segment is 8 bits
-                    result[7:0]    = data1[7:0] ^ data2[7:0];
-                    result[15:8]   = data1[15:8] ^ data2[15:8];
-                    result[23:16]  = data1[23:16] ^ data2[23:16];
-                    result[31:24]  = data1[31:24] ^ data2[31:24];
-                    result[39:32]  = data1[39:32] ^ data2[39:32];
-                    result[47:40]  = data1[47:40] ^ data2[47:40];
-                    result[55:48]  = data1[55:48] ^ data2[55:48];
-                    result[63:56]  = data1[63:56] ^ data2[63:56];
+                    result[0:7]    = data1[0:7] ^ data2[0:7];
+                    result[8:15]   = data1[8:15] ^ data2[8:15];
+                    result[16:23]  = data1[16:23] ^ data2[16:23];
+                    result[24:31]  = data1[24:31] ^ data2[24:31];
+                    result[32:39]  = data1[32:39] ^ data2[32:39];
+                    result[40:47]  = data1[40:47] ^ data2[40:47];
+                    result[48:55]  = data1[48:55] ^ data2[48:55];
+                    result[55:63]  = data1[55:63] ^ data2[55:63];
                 end
                 2'b01: 
 				begin // 16-bit XOR, each segment is 16 bits
-                    result[15:0]   = data1[15:0] ^ data2[15:0];
-                    result[31:16]  = data1[31:16] ^ data2[31:16];
-                    result[47:32]  = data1[47:32] ^ data2[47:32];
-                    result[63:48]  = data1[63:48] ^ data2[63:48];
+                    result[0:15]   = data1[0:15] ^ data2[0:15];
+                    result[16:31]  = data1[16:31] ^ data2[16:31];
+                    result[32:47]  = data1[32:47] ^ data2[32:47];
+                    result[48:63]  = data1[48:63] ^ data2[48:63];
                 end
                 2'b10:
 				begin // 32-bit XOR, each segment is 32 bits
-                    result[31:0]   = data1[31:0] ^ data2[31:0];
-                    result[63:32]  = data1[63:32] ^ data2[63:32];
+                    result[0:31]   = data1[0:31] ^ data2[0:31];
+                    result[32:63]  = data1[32:63] ^ data2[32:63];
                 end
                 2'b11: 
 				begin // 64-bit XOR, entire 64-bit word
@@ -352,26 +383,26 @@
             case (ww)
                 2'b00: 
 				begin // 8-bit NOT, each segment is 8 bits
-                    result[7:0]    = ~data1[7:0];
-                    result[15:8]   = ~data1[15:8];
-                    result[23:16]  = ~data1[23:16];
-                    result[31:24]  = ~data1[31:24];
-                    result[39:32]  = ~data1[39:32];
-                    result[47:40]  = ~data1[47:40];
-                    result[55:48]  = ~data1[55:48];
-                    result[63:56]  = ~data1[63:56];
+                    result[0:7]    = ~data1[0:7];
+                    result[8:15]   = ~data1[8:15];
+                    result[16:23]  = ~data1[16:23];
+                    result[24:31]  = ~data1[24:31];
+                    result[32:39]  = ~data1[32:39];
+                    result[40:47]  = ~data1[40:47];
+                    result[48:55]  = ~data1[48:55];
+                    result[55:63]  = ~data1[55:63];
                 end
                 2'b01: 
 				begin // 16-bit NOT, each segment is 16 bits
-                    result[15:0]   = ~data1[15:0];
-                    result[31:16]  = ~data1[31:16];
-                    result[47:32]  = ~data1[47:32];
-                    result[63:48]  = ~data1[63:48];
+                    result[0:15]   = ~data1[0:15];
+                    result[16:31]  = ~data1[16:31];
+                    result[32:47]  = ~data1[32:47];
+                    result[48:63]  = ~data1[48:63];
                 end
                 2'b10: 
 				begin // 32-bit NOT, each segment is 32 bits
-                    result[31:0]   = ~data1[31:0];
-                    result[63:32]  = ~data1[63:32];
+                    result[0:31]   = ~data1[0:31];
+                    result[32:63]  = ~data1[32:63];
                 end
                 2'b11: 
 				begin // 64-bit NOT, entire 64-bit word
@@ -386,26 +417,26 @@
             case (ww)
                 2'b00: 
 				begin // 8-bit MOVE, each segment is 8 bits
-                    result[7:0]    = data1[7:0];
-                    result[15:8]   = data1[15:8];
-                    result[23:16]  = data1[23:16];
-                    result[31:24]  = data1[31:24];
-                    result[39:32]  = data1[39:32];
-                    result[47:40]  = data1[47:40];
-                    result[55:48]  = data1[55:48];
-                    result[63:56]  = data1[63:56];
+                    result[0:7]    = data1[0:7];
+                    result[8:15]   = data1[8:15];
+                    result[16:23]  = data1[16:23];
+                    result[24:31]  = data1[24:31];
+                    result[32:39]  = data1[32:39];
+                    result[40:47]  = data1[40:47];
+                    result[48:55]  = data1[48:55];
+                    result[55:63]  = data1[55:63];
                 end
                 2'b01: 
 				begin // 16-bit MOVE, each segment is 16 bits
-                    result[15:0]   = data1[15:0];
-                    result[31:16]  = data1[31:16];
-                    result[47:32]  = data1[47:32];
-                    result[63:48]  = data1[63:48];
+                    result[0:15]   = data1[0:15];
+                    result[16:31]  = data1[16:31];
+                    result[32:47]  = data1[32:47];
+                    result[48:63]  = data1[48:63];
                 end
                 2'b10: 
 				begin // 32-bit MOVE, each segment is 32 bits
-                    result[31:0]   = data1[31:0];
-                    result[63:32]  = data1[63:32];
+                    result[0:31]   = data1[0:31];
+                    result[32:63]  = data1[32:63];
                 end
                 2'b11: 
 				begin // 64-bit MOVE, entire 64-bit word
@@ -420,31 +451,30 @@
             case (ww)
                 2'b00: 
 				begin // 8-bit addition
-                    result[7:0]    = data1[7:0] + data2[7:0];
-					//$display("result:",result[7:0]);
-                    result[15:8]   = data1[15:8] + data2[15:8];
-                    result[23:16]  = data1[23:16] + data2[23:16];
-                    result[31:24]  = data1[31:24] + data2[31:24];
-                    result[39:32]  = data1[39:32] + data2[39:32];
-                    result[47:40]  = data1[47:40] + data2[47:40];
-                    result[55:48]  = data1[55:48] + data2[55:48];
-                    result[63:56]  = data1[63:56] + data2[63:56];
+                    result[0:7]    = data1[0:7] + data2[0:7];
+                    result[8:15]   = data1[8:15] + data2[8:15];
+                    result[16:23]  = data1[16:23] + data2[16:23];
+                    result[24:31]  = data1[24:31] + data2[24:31];
+                    result[32:39]  = data1[32:39] + data2[32:39];
+                    result[40:47]  = data1[40:47] + data2[40:47];
+                    result[48:55]  = data1[48:55] + data2[48:55];
+                    result[56:63]  = data1[56:63] + data2[56:63];
                 end
                 2'b01: 
 				begin // 16-bit addition
-                    result[15:0]   = data1[15:0] + data2[15:0];
-                    result[31:16]  = data1[31:16] + data2[31:16];
-                    result[47:32]  = data1[47:32] + data2[47:32];
-                    result[63:48]  = data1[63:48] + data2[63:48];
+                    result[0:15]   = data1[0:15] + data2[0:15];
+                    result[16:31]  = data1[16:31] + data2[16:31];
+                    result[32:47]  = data1[32:47] + data2[32:47];
+                    result[48:63]  = data1[48:63] + data2[48:63];
                 end
                 2'b10: 
 				begin // 32-bit addition
-                    result[31:0]   = data1[31:0] + data2[31:0];
-                    result[63:32]  = data1[63:32] + data2[63:32];
+                    result[0:31]   = data1[0:31] + data2[0:31];
+                    result[32:63]  = data1[32:63] + data2[32:63];
                 end
                 2'b11: 
 				begin // 64-bit addition
-                    result[63:0]   = data1[63:0] + data2[63:0];
+                    result[0:63]   = data1[0:63] + data2[0:63];
                 end
                 default: result = 65'b0; // Default case to avoid latches
             endcase
@@ -455,30 +485,30 @@
             case (ww)
                 2'b00: 
 				begin // 8-bit subtraction
-                    result[7:0]    = data1[7:0] - data2[7:0];
-                    result[15:8]   = data1[15:8] - data2[15:8];
-                    result[23:16]  = data1[23:16] - data2[23:16];
-                    result[31:24]  = data1[31:24] - data2[31:24];
-                    result[39:32]  = data1[39:32] - data2[39:32];
-                    result[47:40]  = data1[47:40] - data2[47:40];
-                    result[55:48]  = data1[55:48] - data2[55:48];
-                    result[63:56]  = data1[63:56] - data2[63:56];
+                    result[0:7]    = data1[0:7] - data2[0:7];
+                    result[8:15]   = data1[8:15] - data2[8:15];
+                    result[16:23]  = data1[16:23] - data2[16:23];
+                    result[24:31]  = data1[24:31] - data2[24:31];
+                    result[32:39]  = data1[32:39] - data2[32:39];
+                    result[40:47]  = data1[40:47] - data2[40:47];
+                    result[48:55]  = data1[48:55] - data2[48:55];
+                    result[56:63]  = data1[56:63] - data2[56:63];
                 end
                 2'b01: 
 				begin // 16-bit subtraction
-                    result[15:0]   = data1[15:0] - data2[15:0];
-                    result[31:16]  = data1[31:16] - data2[31:16];
-                    result[47:32]  = data1[47:32] - data2[47:32];
-                    result[63:48]  = data1[63:48] - data2[63:48];
+                    result[0:15]   = data1[0:15] - data2[0:15];
+                    result[16:31]  = data1[16:31] - data2[16:31];
+                    result[32:47]  = data1[32:47] - data2[32:47];
+                    result[48:63]  = data1[48:63] - data2[48:63];
                 end
                 2'b10: 
 				begin // 32-bit subtraction
-                    result[31:0]   = data1[31:0] - data2[31:0];
-                    result[63:32]  = data1[63:32] - data2[63:32];
+                    result[0:31]   = data1[0:31] - data2[0:31];
+                    result[32:63]  = data1[32:63] - data2[32:63];
                 end
                 2'b11: 
 				begin // 64-bit subtraction
-                    result[63:0]   = data1[63:0] - data2[63:0];
+                    result[0:63]   = data1[0:63] - data2[0:63];
                 end
                 default: result = 65'b0; // Default case to avoid latches
             endcase
@@ -489,19 +519,19 @@
             case (ww)
                 2'b00: 
 				begin // 8-bit segments, result is 16-bit per segment
-                    result[15:0]   = data1[7:0] * data2[7:0];
-                    result[31:16]  = data1[23:16] * data2[23:16];
-                    result[47:32]  = data1[39:32] * data2[39:32];
-                    result[63:48]  = data1[55:48] * data2[55:48];
+                    result[0:15]   = data1[0:7] * data2[0:7];
+                    result[16:31]  = data1[16:23] * data2[16:23];
+                    result[32:47]  = data1[32:39] * data2[32:39];
+                    result[48:63]  = data1[48:55] * data2[48:55];
                 end
                 2'b01: 
 				begin // 16-bit segments, result is 32-bit per segment
-                    result[31:0]   = data1[15:0] * data2[15:0];
-                    result[63:32]  = data1[47:32] * data2[47:32];
+                    result[0:31]   = data1[0:15] * data2[0:15];
+                    result[32:63]  = data1[32:47] * data2[32:47];
                 end
                 2'b10: 
 				begin // 32-bit segments, result is 64-bit
-                    result[63:0]   = data1[31:0] * data2[31:0];
+                    result[0:63]   = data1[0:31] * data2[0:31];
                 end
                 default: result = 64'b0; // Default case to avoid latches
             endcase
@@ -512,21 +542,21 @@
             case (ww)
                 2'b00: 
 				begin // 8位段，每段结果为16位
-                    result[15:0]   = data1[15:8] * data2[15:8];
-                    result[31:16]  = data1[31:24] * data2[31:24];
-                    result[47:32]  = data1[47:40] * data2[47:40];
-                    result[63:48]  = data1[63:56] * data2[63:56];
+                    result[0:15]   = data1[8:15] * data2[8:15];
+                    result[16:31]  = data1[24:31] * data2[24:31];
+                    result[32:47]  = data1[40:47] * data2[40:47];
+                    result[48:63]  = data1[56:63] * data2[56:63];
                 end
                 2'b01: 
 				begin // 16位段，每段结果为32位
-                    result[31:0]   = data1[31:16] * data2[31:16];
-                    result[63:32]  = data1[63:48] * data2[63:48];
+                    result[0:31]   = data1[16:31] * data2[16:31];
+                    result[32:63]  = data1[48:63] * data2[48:63];
                 end
                 2'b10: 
 				begin // 32位段，结果为64位
-                    result[63:0]   = data1[63:32] * data2[63:32];
+                    result[0:63]   = data1[32:63] * data2[32:63];
                 end
-                default: result = 64'b0; // 默认情况，避免产生锁存器
+                default: result = 64'b0; 
             endcase
         end
 		else if (opcode == VSLL) 
@@ -534,30 +564,30 @@
             case (ww)
                 2'b00: 
 				begin // 8-bit shift, shift amount is 3 bits
-                    result[7:0]   = data1[7:0]   << data2[2:0];
-                    result[15:8]  = data1[15:8]  << data2[10:8];
-                    result[23:16] = data1[23:16] << data2[18:16];
-                    result[31:24] = data1[31:24] << data2[26:24];
-                    result[39:32] = data1[39:32] << data2[34:32];
-                    result[47:40] = data1[47:40] << data2[42:40];
-                    result[55:48] = data1[55:48] << data2[50:48];
-                    result[63:56] = data1[63:56] << data2[58:56];
+                    result[0:7]   = data1[0:7]   << data2[5:7];
+                    result[8:15]  = data1[8:15]  << data2[13:15];
+                    result[16:23] = data1[16:23] << data2[21:23];
+                    result[24:31] = data1[24:31] << data2[29:31];
+                    result[32:39] = data1[32:39] << data2[37:39];
+                    result[40:47] = data1[40:47] << data2[45:47];
+                    result[48:55] = data1[48:55] << data2[53:55];
+                    result[56:63] = data1[56:63] << data2[61:63];
                 end
                 2'b01: 
 				begin // 16-bit shift, shift amount is 4 bits
-                    result[15:0]  = data1[15:0]  << data2[3:0];
-                    result[31:16] = data1[31:16] << data2[19:16];
-                    result[47:32] = data1[47:32] << data2[35:32];
-                    result[63:48] = data1[63:48] << data2[51:48];
+                    result[0:15]  = data1[0:15]  << data2[12:15];
+                    result[16:31] = data1[16:31] << data2[28:31];
+                    result[32:47] = data1[32:47] << data2[44:47];
+                    result[48:63] = data1[48:63] << data2[60:63];
                 end
                 2'b10: 
 				begin // 32-bit shift, shift amount is 5 bits
-                    result[31:0]  = data1[31:0]  << data2[4:0];
-                    result[63:32] = data1[63:32] << data2[36:32];
+                    result[0:31]  = data1[0:31]  << data2[27:31];
+                    result[32:63] = data1[32:63] << data2[59:63];
                 end
                 2'b11: 
 				begin // 64-bit shift, shift amount is 6 bits
-                    result[63:0]  = data1[63:0]  << data2[5:0];
+                    result[0:63]  = data1[0:63]  << data2[58:63];
                 end
                 default: result = 64'b0; // Default case to avoid latches
             endcase
@@ -567,130 +597,134 @@
             case (ww)
                 2'b00: 
 				begin // 8-bit shift, shift amount is 3 bits
-                    result[7:0]   = data1[7:0]   >> data2[2:0];
-                    result[15:8]  = data1[15:8]  >> data2[10:8];
-                    result[23:16] = data1[23:16] >> data2[18:16];
-                    result[31:24] = data1[31:24] >> data2[26:24];
-                    result[39:32] = data1[39:32] >> data2[34:32];
-                    result[47:40] = data1[47:40] >> data2[42:40];
-                    result[55:48] = data1[55:48] >> data2[50:48];
-                    result[63:56] = data1[63:56] >> data2[58:56];
+                    result[0:7]   = data1[0:7]   >> data2[5:7];
+                    result[8:15]  = data1[8:15]  >> data2[13:15];
+                    result[16:23] = data1[16:23] >> data2[21:23];
+                    result[24:31] = data1[24:31] >> data2[29:31];
+                    result[32:39] = data1[32:39] >> data2[37:39];
+                    result[40:47] = data1[40:47] >> data2[45:47];
+                    result[48:55] = data1[48:55] >> data2[53:55];
+                    result[56:63] = data1[56:63] >> data2[61:63];
                 end
                 2'b01: 
 				begin // 16-bit shift, shift amount is 4 bits
-                    result[15:0]  = data1[15:0]  >> data2[3:0];
-                    result[31:16] = data1[31:16] >> data2[19:16];
-                    result[47:32] = data1[47:32] >> data2[35:32];
-                    result[63:48] = data1[63:48] >> data2[51:48];
+                    result[0:15]  = data1[0:15]  >> data2[12:15];
+                    result[16:31] = data1[16:31] >> data2[28:31];
+                    result[32:47] = data1[32:47] >> data2[44:47];
+                    result[48:63] = data1[48:63] >> data2[60:63];
                 end
                 2'b10: 
 				begin // 32-bit shift, shift amount is 5 bits
-                    result[31:0]  = data1[31:0]  >> data2[4:0];
-                    result[63:32] = data1[63:32] >> data2[36:32];
+                    result[0:31]  = data1[0:31]  >> data2[27:31];
+                    result[32:63] = data1[32:63] >> data2[59:63];
                 end
                 2'b11: 
 				begin // 64-bit shift, shift amount is 6 bits
-                    result[63:0]  = data1[63:0]  >> data2[5:0];
+                    result[0:63]  = data1[0:63]  >> data2[58:63];
                 end
                 default: result = 64'b0; // Default case to avoid latches
             endcase
         end
 		
-		 else if (opcode == VSRA) 
-		 begin
-            case (ww)
-                2'b00: 
-				begin // 8-bit shift, shift amount is 3 bits
-                    result[7:0]   = { {3{data1[7]}}, data1[7:3] >> data2[2:0] };
-                    result[15:8]  = { {3{data1[15]}}, data1[15:8] >> data2[10:8] };
-                    result[23:16] = { {3{data1[23]}}, data1[23:16] >> data2[18:16] };
-                    result[31:24] = { {3{data1[31]}}, data1[31:24] >> data2[26:24] };
-                    result[39:32] = { {3{data1[39]}}, data1[39:32] >> data2[34:32] };
-                    result[47:40] = { {3{data1[47]}}, data1[47:40] >> data2[42:40] };
-                    result[55:48] = { {3{data1[55]}}, data1[55:48] >> data2[50:48] };
-                    result[63:56] = { {3{data1[63]}}, data1[63:56] >> data2[58:56] };
-                end
-                2'b01: 
-				begin // 16-bit shift, shift amount is 4 bits
-                    result[15:0]  = { {4{data1[15]}}, data1[15:4] >> data2[3:0] };
-                    result[31:16] = { {4{data1[31]}}, data1[31:16] >> data2[19:16] };
-                    result[47:32] = { {4{data1[47]}}, data1[47:32] >> data2[35:32] };
-                    result[63:48] = { {4{data1[63]}}, data1[63:48] >> data2[51:48] };
-                end
-                2'b10: 
-				begin // 32-bit shift, shift amount is 5 bits
-                    result[31:0]  = { {5{data1[31]}}, data1[31:5] >> data2[4:0] };
-                    result[63:32] = { {5{data1[63]}}, data1[63:32] >> data2[36:32] };
-                end
-                2'b11: 
-				begin // 64-bit shift, shift amount is 6 bits
-                    result[63:0]  = { {6{data1[63]}}, data1[63:6] >> data2[5:0] };
-                end
-                default: result = 64'b0; // Default case to avoid latches
-            endcase
-        end
-		
-		else if (opcode == VRTTTH) 
+		else if (opcode == VSRA)
 		begin
-            case (ww)
-                2'b00: 
-				begin // 8-bit segments, swap nibbles
-                    result[7:0]   = {data1[3:0], data1[7:4]};
-                    result[15:8]  = {data1[11:8], data1[15:12]};
-                    result[23:16] = {data1[19:16], data1[23:20]};
-                    result[31:24] = {data1[27:24], data1[31:28]};
-                    result[39:32] = {data1[35:32], data1[39:36]};
-                    result[47:40] = {data1[43:40], data1[47:44]};
-                    result[55:48] = {data1[51:48], data1[55:52]};
-                    result[63:56] = {data1[59:56], data1[63:60]};
-                end
-                2'b01: 
-				begin // 16-bit segments, swap bytes
-                    result[15:0]  = {data1[7:0], data1[15:8]};
-                    result[31:16] = {data1[23:16], data1[31:24]};
-                    result[47:32] = {data1[39:32], data1[47:40]};
-                    result[63:48] = {data1[55:48], data1[63:56]};
-                end
-                2'b10: 
-				begin // 32-bit segments, swap half-words
-                    result[31:0]  = {data1[15:0], data1[31:16]};
-                    result[63:32] = {data1[47:32], data1[63:48]};
-                end
-                2'b11: 
-				begin // 64-bit segment, swap words
-                    result[63:0]  = {data1[31:0], data1[63:32]};
-                end
-                default: result = 64'b0; // Default case to avoid latches
-            endcase
-        end
+			case (ww)
+				2'b00: 
+					begin
+						result[0:7]   = $signed(data1[0:7]) >>> data2[5:7];
+						result[8:15]  = $signed(data1[8:15]) >>> data2[13:15];
+						result[16:23] = $signed(data1[16:23]) >>> data2[21:23];
+						result[24:31] = $signed(data1[24:31]) >>> data2[29:31];
+						result[32:39] = $signed(data1[32:39]) >>> data2[37:39];
+						result[40:47] = $signed(data1[40:47]) >>> data2[45:47];
+						result[48:55] = $signed(data1[48:55]) >>> data2[53:55];
+						result[56:63] = $signed(data1[56:63]) >>> data2[61:63];
+						
+					end
+				2'b01: 
+					begin
+						result[0:15]  = $signed(data1[0:15]) >>> data2[12:15];
+						result[16:31] = $signed(data1[16:31]) >>> data2[28:31];
+						result[32:47] = $signed(data1[32:47]) >>> data2[44:47];
+						result[48:63] = $signed(data1[48:63]) >>> data2[60:63];
+					end
+				2'b10:
+					begin
+						result[0:31]  = $signed(data1[0:31]) >>> data2[27:31];
+						result[32:63] = $signed(data1[32:63]) >>> data2[59:63];
+					end
+				2'b11: 
+					begin
+						result[0:63]  = $signed(data1[0:63]) >>> data2[58:63];
+					end
+				default: result = 64'b0;
+			endcase
+		end
+		
+	
+
+		else if (opcode == VRTTTH)
+		begin
+			case (ww)
+				2'b00:
+					begin // 8-bit segments, swap nibbles
+						result[0:7]   = {data1[4:7], data1[0:3]};
+						result[8:15]  = {data1[12:15], data1[8:11]};
+						result[16:23] = {data1[20:23], data1[16:19]};
+						result[24:31] = {data1[28:31], data1[24:27]};
+						result[32:39] = {data1[36:39], data1[32:35]};
+						result[40:47] = {data1[44:47], data1[40:43]};
+						result[48:55] = {data1[52:55], data1[48:51]};
+						result[56:63] = {data1[60:63], data1[56:59]};
+					end
+			2'b01:
+					begin // 16-bit segments, swap bytes
+						result[0:15]  = {data1[8:15], data1[0:7]};
+						result[16:31] = {data1[24:31], data1[16:23]};
+						result[32:47] = {data1[40:47], data1[32:39]};
+						result[48:63] = {data1[56:63], data1[48:55]};
+					end
+			2'b10:
+					begin // 32-bit segments, swap half-words
+						result[0:31]  = {data1[16:31], data1[0:15]};
+						result[32:63] = {data1[48:63], data1[32:47]};
+					end
+			2'b11:
+					begin // 64-bit segment, swap words
+					result[0:63]  = {data1[32:63], data1[0:31]};
+					end
+					default: result = 64'b0; // Default case to avoid latches
+		    endcase
+		end
+
 		
 		else if (opcode == VDIV) 
 		begin
             case (ww)
                 2'b00: 
 				begin // 8-bit division, segment each 8-bit field
-                    result[7:0]    = quotient_8bit_0;
-                    result[15:8]   = quotient_8bit_1;
-                    result[23:16]  = quotient_8bit_2;
-                    result[31:24]  = quotient_8bit_3;
-                    result[39:32]  = quotient_8bit_4;
-                    result[47:40]  = quotient_8bit_5;
-                    result[55:48]  = quotient_8bit_6;
-                    result[63:56]  = quotient_8bit_7;
+                    result[0:7]    = quotient_8bit_0;
+                    result[8:15]   = quotient_8bit_1;
+                    result[16:23]  = quotient_8bit_2;
+                    result[24:31]  = quotient_8bit_3;
+                    result[32:39]  = quotient_8bit_4;
+                    result[40:47]  = quotient_8bit_5;
+                    result[48:55]  = quotient_8bit_6;
+                    result[56:63]  = quotient_8bit_7;
                     divide_by_0 = div_by_0_8bit_0 | div_by_0_8bit_1 | div_by_0_8bit_2 | div_by_0_8bit_3 | div_by_0_8bit_4 | div_by_0_8bit_5 | div_by_0_8bit_6 | div_by_0_8bit_7;
                 end
                 2'b01: 
 				begin // 16-bit division, segment each 16-bit field
-                    result[15:0]   = quotient_16bit_0;
-                    result[31:16]  = quotient_16bit_1;
-                    result[47:32]  = quotient_16bit_2;
-                    result[63:48]  = quotient_16bit_3;
+                    result[0:15]   = quotient_16bit_0;
+                    result[16:31]  = quotient_16bit_1;
+                    result[32:47]  = quotient_16bit_2;
+                    result[48:63]  = quotient_16bit_3;
                     divide_by_0 = div_by_0_16bit_0 | div_by_0_16bit_1 | div_by_0_16bit_2 | div_by_0_16bit_3;
                 end
                 2'b10: 
 				begin // 32-bit division, segment each 32-bit field
-                    result[31:0]   = quotient_32bit_0;
-                    result[63:32]  = quotient_32bit_1;
+                    result[0:31]   = quotient_32bit_0;
+                    result[32:63]  = quotient_32bit_1;
                     divide_by_0 = div_by_0_32bit_0 | div_by_0_32bit_1;
                 end
                 2'b11: 
@@ -710,28 +744,28 @@
             case (ww)
                 2'b00: 
 				begin // 8-bit division, segment each 8-bit field
-                    result[7:0]    = remainder_8bit_0;
-                    result[15:8]   = remainder_8bit_1;
-                    result[23:16]  = remainder_8bit_2;
-                    result[31:24]  = remainder_8bit_3;
-                    result[39:32]  = remainder_8bit_4;
-                    result[47:40]  = remainder_8bit_5;
-                    result[55:48]  = remainder_8bit_6;
-                    result[63:56]  = remainder_8bit_7;
+                    result[0:7]    = remainder_8bit_0;
+                    result[8:15]   = remainder_8bit_1;
+                    result[16:23]  = remainder_8bit_2;
+                    result[24:31]  = remainder_8bit_3;
+                    result[32:39]  = remainder_8bit_4;
+                    result[40:47]  = remainder_8bit_5;
+                    result[48:55]  = remainder_8bit_6;
+                    result[56:63]  = remainder_8bit_7;
                     divide_by_0 = div_by_0_8bit_0 | div_by_0_8bit_1 | div_by_0_8bit_2 | div_by_0_8bit_3 | div_by_0_8bit_4 | div_by_0_8bit_5 | div_by_0_8bit_6 | div_by_0_8bit_7;
                 end
                 2'b01: 
 				begin // 16-bit division, segment each 16-bit field
-                    result[15:0]   = remainder_16bit_0;
-                    result[31:16]  = remainder_16bit_1;
-                    result[47:32]  = remainder_16bit_2;
-                    result[63:48]  = remainder_16bit_3;
+                    result[0:15]   = remainder_16bit_0;
+                    result[16:31]  = remainder_16bit_1;
+                    result[32:47]  = remainder_16bit_2;
+                    result[48:63]  = remainder_16bit_3;
                     divide_by_0 = div_by_0_16bit_0 | div_by_0_16bit_1 | div_by_0_16bit_2 | div_by_0_16bit_3;
                 end
                 2'b10: 
 				begin // 32-bit division, segment each 32-bit field
-                    result[31:0]   =remainder_32bit_0;
-                    result[63:32]  = remainder_32bit_1;
+                    result[0:31]   =remainder_32bit_0;
+                    result[32:63]  = remainder_32bit_1;
                     divide_by_0 = div_by_0_32bit_0 | div_by_0_32bit_1;
                 end
                 2'b11: 
@@ -753,15 +787,15 @@
             case (ww)
                 2'b00: 
 				begin // 8-bit square, for each even 8-bit segment
-                    result[15:0]   = square_8bit_0;
-                    result[31:16]  = square_8bit_2;
-                    result[47:32]  = square_8bit_4;
-                    result[63:48]  = square_8bit_6;
+                    result[0:15]   = square_8bit_0;
+                    result[16:31]  = square_8bit_2;
+                    result[32:47]  = square_8bit_4;
+                    result[48:63]  = square_8bit_6;
                 end
                 2'b01: 
 				begin // 16-bit square, for each even 16-bit segment
-                    result[31:0]   = square_16bit_0;
-                    result[63:32]  = square_16bit_2;
+                    result[0:31]   = square_16bit_0;
+                    result[32:63]  = square_16bit_2;
                 end
                 2'b10: 
 				begin // 32-bit square, only one 32-bit segment
@@ -776,15 +810,15 @@
             case (ww)
                 2'b00: 
 				begin // 8-bit square, for each odd 8-bit segment
-                    result[15:0]   = square_8bit_1;
-                    result[31:16]  = square_8bit_3;
-                    result[47:32]  = square_8bit_5;
-                    result[63:48]  = square_8bit_7;
+                    result[0:15]   = square_8bit_1;
+                    result[16:31]  = square_8bit_3;
+                    result[32:47]  = square_8bit_5;
+                    result[48:63]  = square_8bit_7;
                 end
                 2'b01: 
 				begin // 16-bit square, for each odd 16-bit segment
-                    result[31:0]   = square_16bit_1;
-                    result[63:32]  = square_16bit_3;
+                    result[0:31]   = square_16bit_1;
+                    result[32:63]  = square_16bit_3;
                 end
                 2'b10: 
 				begin // 32-bit square, only one 32-bit odd segment
@@ -800,26 +834,26 @@
             case (ww)
                 2'b00: 
 				begin // 8-bit square root, segment each 8-bit field
-                    result[3:0]    = root_8bit_0;
-                    result[7:4]    = root_8bit_1;
-                    result[11:8]   = root_8bit_2;
-                    result[15:12]  = root_8bit_3;
-                    result[19:16]  = root_8bit_4;
-                    result[23:20]  = root_8bit_5;
-                    result[27:24]  = root_8bit_6;
-                    result[31:28]  = root_8bit_7;
+                    result[0:7]    = root_8bit_0;
+                    result[8:15]    = root_8bit_1;
+                    result[16:23]   = root_8bit_2;
+                    result[24:31]  = root_8bit_3;
+                    result[32:39]  = root_8bit_4;
+                    result[40:47]  = root_8bit_5;
+                    result[48:55]  = root_8bit_6;
+                    result[56:63]  = root_8bit_7;
                 end
                 2'b01: 
 				begin // 16-bit square root, segment each 16-bit field
-                    result[7:0]   = root_16bit_0;
-                    result[15:8]  = root_16bit_1;
-                    result[23:16] = root_16bit_2;
-                    result[31:24] = root_16bit_3;
+                    result[0:15]   = root_16bit_0;
+                    result[16:31]  = root_16bit_1;
+                    result[32:47] = root_16bit_2;
+                    result[48:63] = root_16bit_3;
                 end
                 2'b10:
 				begin // 32-bit square root, segment each 32-bit field
-                    result[15:0]  = root_32bit_0;
-                    result[31:16] = root_32bit_1;
+                    result[0:31]  = root_32bit_0;
+                    result[32:63] = root_32bit_1;
                 end
                 2'b11: 
 				begin // 64-bit square root, entire 64-bit field
@@ -828,7 +862,6 @@
                 default: result = 64'b0; // Handle invalid ww values
             endcase		
 		end
-		
 		
 		
 		

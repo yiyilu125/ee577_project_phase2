@@ -134,19 +134,20 @@ module pipeline #(
         .read_address1(read_address1),
         .read_address2(read_address2),
         .data_out1(reg_data1),
-        .data_out2(reg_data2)
+        .data_out2(reg_data2),
+		.ppp(s3_reg_ppp)
     );
 
     //forwarding unit mux
     mux_2 mux_ra (
         .in0(reg_data1),
-        .in1(s3_reg_result),     //forwarding from stage 3
+        .in1(mux_result),     //forwarding from stage 3
         .select(mux_ctrl_rA),
         .out(mux_rA_data)
     );
     mux_2 mux_rb(
         .in0(reg_data2),
-        .in1(s3_reg_result),     //forwarding from stage 3
+        .in1(mux_result),     //forwarding from stage 3
         .select(mux_ctrl_rB),
         .out(mux_rB_data)
     );
