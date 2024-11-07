@@ -195,7 +195,7 @@ begin
 	$readmemh("cmp_test.imem.3.fill", IM_node3.MEM); 	// loading instruction memory into node3*/
 	
 	
-	$readmemh("imem_1.fill", IM_node0.MEM); 	// loading instruction memory into node0
+	$readmemh("imem_12.fill", IM_node0.MEM); 	// loading instruction memory into node0
 
 	$readmemh("dmem.fill", DM_node0.MEM); 	// loading data memory into node0
 	

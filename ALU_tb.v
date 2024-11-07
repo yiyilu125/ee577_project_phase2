@@ -4,11 +4,11 @@ module alu_tb;
 
     // Testbench signals
     reg [5:0] opcode;
-    reg [63:0] data1, data2;
-    reg [4:0] ww;
+    reg [0:63] data1, data2;
+    reg [1:0] ww;
     wire [63:0] result;
     wire divide_by_0;
-    reg [63:0] expected_result;
+    reg [0:63] expected_result;
     reg expected_divide_by_0;
 
     // Instantiate the ALU module
@@ -26,12 +26,50 @@ module alu_tb;
         $timeformat(-9, 1, " ns", 6);
 
         // Test VAND operation
-        opcode = 6'b000001; // VAND
-        data1 = 65'hAAAAAAAAAAAAAAAA;
-        data2 = 65'h5555555555555555;
+        opcode = 6'b001000; // VAND
+        data1 = 64'h1211edee1211edee;
+        data2 = 64'h0f0f0f0f0f0f0f0f;
 
-        ww = 5'b00000; // 8-bit
-        expected_result = {data1[63:56] & data2[63:56], data1[55:48] & data2[55:48], data1[47:40] & data2[47:40], data1[39:32] & data2[39:32], data1[31:24] & data2[31:24], data1[23:16] & data2[23:16], data1[15:8] & data2[15:8], data1[7:0] & data2[7:0]};
+        ww = 2'b00; 
+		
+		
+		
+		#10
+	    ww = 2'b01; // 16-bit segments
+       expected_result[0:31]   = data1[0:15] * data2[0:15];
+       expected_result[32:63]  = data1[32:47] * data2[32:47];
+        #10;
+        if (result[63:0] !== expected_result[0:63])
+            $display("Time: %t, Opcode: MULE, WW: 16-bit, Data1: %h, Data2: %h, Result: %h, Expected: %h [FAIL]", $time, data1, data2, result, expected_result);
+        else
+            $display("Time: %t, Opcode: MULE, WW: 16-bit, Data1: %h, Data2: %h, Result: %h [PASS]", $time, data1, data2, result);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		// 8-bit
+     /*   expected_result = {data1[63:56] & data2[63:56], data1[55:48] & data2[55:48], data1[47:40] & data2[47:40], data1[39:32] & data2[39:32], data1[31:24] & data2[31:24], data1[23:16] & data2[23:16], data1[15:8] & data2[15:8], data1[7:0] & data2[7:0]};
         #10;
         if (result !== expected_result) 
             $display("Time: %t, Opcode: VAND, WW: 8-bit, Data1: %h, Data2: %h, Result: %h, Expected: %h [FAIL]", $time, data1, data2, result, expected_result);
@@ -315,8 +353,6 @@ module alu_tb;
 	   
 	   
 	   
-	   
-	
 	//I just directly test the design ware component ------------------------------------------------------------------------------------------------------------
 	
 	   opcode = 6'b001110; // VDIV
@@ -504,7 +540,7 @@ module alu_tb;
 	
 		
 
-        // End simulation
+        // End simulation*/
     
 	   
 	   

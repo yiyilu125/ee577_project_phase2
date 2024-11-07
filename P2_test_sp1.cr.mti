@@ -12,7 +12,7 @@ Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
 Top level modules:
 	DW_div
 
-} {} {}} C:/ee577_project_phase2/Decoder.v {1 {vlog -work work -vopt -stats=none {C:\ee577_project_phase2\Decoder.v}
+} {} {}} C:/ee577_project_phase2/Decoder.v {1 {vlog -work work -vopt -stats=none C:/ee577_project_phase2/Decoder.v
 Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
 -- Compiling module instruction_decoder
 
@@ -32,13 +32,6 @@ Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
 
 Top level modules:
 	hdu
-
-} {} {}} C:/ee577_project_phase2/ALU.v {1 {vlog -work work -vopt -stats=none {C:\ee577_project_phase2\ALU.v}
-Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
--- Compiling module alu
-
-Top level modules:
-	alu
 
 } {} {}} C:/ee577_project_phase2/decoder_tb.v {1 {vlog -work work -vopt -stats=none C:/ee577_project_phase2/decoder_tb.v
 Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
@@ -145,14 +138,14 @@ Top level modules:
 	XOR2X1
 	tb_cmp
 
-} {} {}} C:/ee577_project_phase2/pipeline.v {1 {vlog -work work -vopt -stats=none {C:\ee577_project_phase2\pipeline.v}
+} {} {}} C:/ee577_project_phase2/pipeline.v {1 {vlog -work work -vopt -stats=none C:/ee577_project_phase2/pipeline.v
 Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
 -- Compiling module pipeline
 
 Top level modules:
 	pipeline
 
-} {} {}} C:/ee577_project_phase2/regfile.v {1 {vlog -work work -vopt -stats=none {C:\ee577_project_phase2\regfile.v}
+} {} {}} C:/ee577_project_phase2/regfile.v {1 {vlog -work work -vopt -stats=none C:/ee577_project_phase2/regfile.v
 Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
 -- Compiling module register_file
 
